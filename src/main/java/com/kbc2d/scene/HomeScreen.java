@@ -21,8 +21,8 @@ public class HomeScreen extends GameScene {
 
         iv = new ImageView(FXGL.image("ui/rectMenu/mainMenuBg.png"));
         box = new VBox(20,
-                new ImageButton("rectMenu/newGame", 140, 28, () -> SceneUtils.setScene(Scene2.class)),
-                new ImageButton("rectMenu/settings", 140, 28, () -> SceneUtils.setScene(Scene1.class)),
+                new ImageButton("rectMenu/newGame", 140, 28, () -> SceneUtils.setScene(Scene1.class)),
+                new ImageButton("rectMenu/settings", 140, 28, () -> SceneUtils.setScene(Scene2.class)),
                 new ImageButton("rectMenu/help", 140, 28, () -> {}) //,
 //                new ImageButton("rectMenu/quit", 140, 28, () ->
         );
