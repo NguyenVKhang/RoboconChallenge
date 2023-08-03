@@ -1,8 +1,7 @@
 package com.kbc2d.scene;
 
 import com.almasb.fxgl.dsl.FXGL;
-import com.kbc2d.components.ComponentSingleton;
-import com.kbc2d.components.RectangleComponent;
+
 import com.kbc2d.ui.ImageButton;
 import com.kbc2d.utils.SceneUtils;
 import javafx.scene.control.Button;
