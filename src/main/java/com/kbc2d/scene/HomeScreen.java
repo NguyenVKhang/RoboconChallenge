@@ -4,16 +4,13 @@ import com.almasb.fxgl.dsl.FXGL;
 
 import com.kbc2d.ui.ImageButton;
 import com.kbc2d.utils.SceneUtils;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 
 public class HomeScreen extends GameScene {
 
-//    private final Button btn1;
-//
-//    private final Button btn2;
+
     VBox box;
     ImageView iv;
 
@@ -21,7 +18,7 @@ public class HomeScreen extends GameScene {
 
         iv = new ImageView(FXGL.image("ui/rectMenu/mainMenuBg.png"));
         box = new VBox(20,
-                new ImageButton("rectMenu/newGame", 140, 28, () -> SceneUtils.setScene(Scene1.class)),
+                new ImageButton("rectMenu/newGame", 140, 28, () -> SceneUtils.setScene(TrainingMode.class)),
                 new ImageButton("rectMenu/settings", 140, 28, () -> SceneUtils.setScene(Scene2.class)),
                 new ImageButton("rectMenu/help", 140, 28, () -> {}) //,
 //                new ImageButton("rectMenu/quit", 140, 28, () ->

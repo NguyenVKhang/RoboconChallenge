@@ -14,6 +14,7 @@ public class Scene2 extends GameScene {
 
 
     }
+
     @Override
     protected void createWorld() {
 

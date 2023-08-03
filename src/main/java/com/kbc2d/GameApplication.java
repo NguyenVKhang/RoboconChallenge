@@ -17,7 +17,7 @@ public class GameApplication extends com.almasb.fxgl.app.GameApplication {
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setTitle("Robocon Challenge");
         gameSettings.setVersion("");
-        gameSettings.setWidth(1200);
+        gameSettings.setWidth(1000);
         gameSettings.setHeight(600);
         gameSettings.setAppIcon("logo.jpg");
     }
