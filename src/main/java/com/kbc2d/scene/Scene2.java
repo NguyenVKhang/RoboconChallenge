@@ -17,6 +17,7 @@ public class Scene2 extends GameScene{
             new HomeScreen().create();
         });
     }
+
     @Override
     protected void createWorld() {
         ComponentSingleton.getInstance().setRectangleComponent(
