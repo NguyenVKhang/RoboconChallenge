@@ -3,21 +3,21 @@ package com.kbc2d.components;
 public class ComponentSingleton {
     public static final ComponentSingleton instance = new ComponentSingleton();
 
-    RectangleComponent rectangleComponent;
+    RobotComponent robotComponent;
 
     private ComponentSingleton(){
-        rectangleComponent = new RectangleComponent();
+        robotComponent = new RobotComponent();
     };
 
     public static ComponentSingleton getInstance() {
         return instance;
     }
 
-    public RectangleComponent getRectangleComponent() {
-        return rectangleComponent;
+    public RobotComponent getRectangleComponent() {
+        return robotComponent;
     }
 
-    public void setRectangleComponent(RectangleComponent rectangleComponent) {
-        this.rectangleComponent = rectangleComponent;
+    public void setRectangleComponent(RobotComponent robotComponent) {
+        this.robotComponent = robotComponent;
     }
 }

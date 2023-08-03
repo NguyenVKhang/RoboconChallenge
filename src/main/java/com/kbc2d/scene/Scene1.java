@@ -2,7 +2,7 @@ package com.kbc2d.scene;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.kbc2d.components.ComponentSingleton;
-import com.kbc2d.components.RectangleComponent;
+import com.kbc2d.components.RobotComponent;
 import javafx.scene.control.Button;
 
 public class Scene1 extends GameScene{
@@ -21,7 +21,7 @@ public class Scene1 extends GameScene{
     @Override
     protected void createWorld() {
         ComponentSingleton.getInstance().setRectangleComponent(
-                FXGL.getGameWorld().spawn("rec1", 100, 100).getComponent(RectangleComponent.class));
+                FXGL.getGameWorld().spawn("rec1", 100, 100).getComponent(RobotComponent.class));
     }
 
     @Override

@@ -1,30 +1,29 @@
 package com.kbc2d.scene;
 
 import com.almasb.fxgl.dsl.FXGL;
-import com.kbc2d.components.ComponentSingleton;
-import com.kbc2d.components.RectangleComponent;
-import javafx.scene.control.Button;
+import com.almasb.fxgl.entity.Entity;
+import com.kbc2d.components.LineComponent;
 
-public class Scene2 extends GameScene{
+import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
 
-    private final Button btn;
+public class Scene2 extends GameScene {
+
+    private Entity player;
 
     public Scene2() {
-        btn = new Button("back");
-        btn.setLayoutX(100);
-        btn.setLayoutY(100);
-        btn.setOnAction(e -> {
-            new HomeScreen().create();
-        });
+
+
     }
     @Override
     protected void createWorld() {
-        ComponentSingleton.getInstance().setRectangleComponent(
-                FXGL.getGameWorld().spawn("rec2", 200, 200).getComponent(RectangleComponent.class));
+
+        FXGL.getGameWorld().spawn("player", 200, 100);
+
+
     }
 
     @Override
     protected void createUI() {
-        FXGL.getGameScene().addUINode(btn);
     }
+
 }
