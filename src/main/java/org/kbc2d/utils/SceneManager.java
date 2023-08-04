@@ -1,9 +1,6 @@
 package org.kbc2d.utils;
 
-import org.kbc2d.scene.BaseScene;
-import org.kbc2d.scene.GameScene;
-import org.kbc2d.scene.HomeScene;
-import org.kbc2d.scene.SceneType;
+import org.kbc2d.scene.*;
 
 public class SceneManager {
     private static BaseScene currentScene;
@@ -17,9 +14,23 @@ public class SceneManager {
             case HOME_SCENE:
                 currentScene = new HomeScene();
                 break;
-            case GAME_SCENE:
-                currentScene = new GameScene();
+            case TRAINING_SCENE:
+                currentScene = new TrainingScene();
                 break;
+            case PvE_SCENE:
+                currentScene = new PvEScene();
+                break;
+
+            case PvP_SCENE:
+                currentScene = new PvPScene();
+                break;
+
+            case SETTING_SCENE:
+                currentScene = new SettingScene();
+                break;
+
+
+
         }
     }
 }

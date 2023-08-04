@@ -1,10 +1,9 @@
 package org.kbc2d.scene;
 
-public class TrainingScene extends BaseScene {
+public class SettingScene extends BaseScene{
     @Override
     public void render() {
-        System.out.println("TrainingScene");
-
+        System.out.println("SettingScene");
     }
 
     @Override

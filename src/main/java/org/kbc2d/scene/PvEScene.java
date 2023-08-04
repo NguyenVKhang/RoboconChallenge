@@ -3,7 +3,7 @@ package org.kbc2d.scene;
 import org.kbc2d.game.object.Ring;
 import org.kbc2d.game.object.Robot;
 
-public class GameScene extends BaseScene{
+public class PvEScene extends BaseScene{
 
     Robot robot = new Robot();
     Ring ring = new Ring(200, 200);

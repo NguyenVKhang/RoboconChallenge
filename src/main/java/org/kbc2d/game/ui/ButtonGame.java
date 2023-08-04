@@ -6,9 +6,13 @@ import org.kbc2d.scene.SceneType;
 import org.kbc2d.utils.ImageManager;
 import org.kbc2d.utils.SceneManager;
 
-public class ButtonExample extends BaseComponent implements ClickableComponent{
+public class ButtonGame extends BaseComponent implements ClickableComponent{
 
-    public ButtonExample(float x, float y) {
+    public ButtonGame(String path, float x, float y) {
+        super(x, y, ImageManager.getImage(path));
+    }
+
+    public ButtonGame(float x, float y) {
         super(x, y, ImageManager.getImage("asset/btn.png"));
     }
 
@@ -27,6 +31,13 @@ public class ButtonExample extends BaseComponent implements ClickableComponent{
 
 
     }
+//
+//    @Override
+//    public void handleClick(double x, double y) {
+//        if(this.x <= x && x <= this.x + width && this.y <= y && y <= this.y + height) {
+//            SceneManager.setCurrentScene(SceneType.GAME_SCENE);
+//        }
+//    }
 
     @Override
     public boolean handleClick(double x, double y) {
@@ -36,5 +47,4 @@ public class ButtonExample extends BaseComponent implements ClickableComponent{
         }
         return false;
     }
-
 }
