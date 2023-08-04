@@ -1,9 +1,10 @@
 package org.kbc2d.game.ui;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import org.kbc2d.constant.GlobalConstant;
 
-public abstract class BaseComponent {
+public abstract class BaseComponent extends Button {
     protected float x;
     protected float y;
     protected double width;

@@ -26,6 +26,8 @@ public class App extends Application {
         StackPane stackPane = new StackPane(canvas);
         Scene scene = new Scene(stackPane);
         GameVars.put("scene", scene);
+
+
         Input.attachEventHandle(scene);
         stage.setScene(scene);
         stage.show();

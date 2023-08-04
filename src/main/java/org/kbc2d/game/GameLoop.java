@@ -20,6 +20,7 @@ public class GameLoop {
 
             SceneManager.getCurrentScene().render();
 
+
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
