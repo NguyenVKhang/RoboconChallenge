@@ -5,8 +5,8 @@ import org.kbc2d.constant.GlobalConstant;
 
 public abstract class BaseObject
 {
-    protected float x;
-    protected float y;
+    protected double x;
+    protected double y;
     protected double width;
     protected double height;
 
@@ -27,7 +27,7 @@ public abstract class BaseObject
         this.width = image.getWidth();
         this.height = image.getHeight();
     }
-    public BaseObject(float x, float y) {
+    public BaseObject(double x, double y) {
         this.x = x;
         this.y = y;
         this.width = GlobalConstant.DEFAULT_COMPONENT_WIDTH;
@@ -35,7 +35,7 @@ public abstract class BaseObject
         this.image = null;
     }
 
-    public BaseObject(float x, float y, Image image) {
+    public BaseObject(double x, double y, Image image) {
         this.x = x;
         this.y = y;
         this.image = image;
@@ -50,7 +50,7 @@ public abstract class BaseObject
         this.height = height;
     }
 
-    public BaseObject(float x, float y, double width, double height, Image image) {
+    public BaseObject(double x, double y, double width, double height, Image image) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -58,7 +58,34 @@ public abstract class BaseObject
         this.image = image;
     }
 
+    public void setImage(Image image) {
+        this.image = image;
+        this.width = image.getWidth();
+        this.height = image.getHeight();
+    }
+
+    public void setPosition(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
     public abstract void render();
-    public abstract void update(float deltaTime);
+    public abstract void update(double deltaTime);
     public abstract void handleEvent();
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
 }
