@@ -123,9 +123,9 @@ public class HomeScene extends BaseScene{
                     if (trainingModeButton.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
                         SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
                     }
-//                    else if (pvpModeButton.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-//                        SceneManager.setCurrentScene(SceneType.PvP_SCENE);
-//                    }
+                    else if (pvpModeButton.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
+                        SceneManager.setCurrentScene(SceneType.PvP_SCENE);
+                    }
 //                    else if (pveModeButton.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
 //                        SceneManager.setCurrentScene(SceneType.PvE_SCENE);
 //                    }

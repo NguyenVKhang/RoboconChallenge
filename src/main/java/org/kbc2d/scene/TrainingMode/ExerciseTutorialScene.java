@@ -66,7 +66,12 @@ public class ExerciseTutorialScene extends BaseScene {
                     if (backBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
                         SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
                     }
+                    else if (nextBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
+                        SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
+                    }
                 }
+
+
         );
         GameVars.get("scene", Scene.class).setOnMouseMoved(
                 mouseEvent -> {

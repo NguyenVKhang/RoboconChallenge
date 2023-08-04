@@ -7,9 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="robocon-challenge" />
-        <module name="RoboconChallenge" />
-        <module name="123" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="RoboconChallenge" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
