@@ -3,6 +3,7 @@ package org.kbc2d;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.kbc2d.constant.GlobalConstant;
@@ -17,6 +18,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         Canvas canvas = new Canvas(GlobalConstant.SCREEN_WIDTH, GlobalConstant.SCREEN_HEIGHT);
+        stage.setTitle("Robocon Challenge");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("asset/textures/logo.jpg")));
+
+
         GameVars.put("gc", canvas.getGraphicsContext2D());
         StackPane stackPane = new StackPane(canvas);
         Scene scene = new Scene(stackPane);
