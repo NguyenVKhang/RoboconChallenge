@@ -57,6 +57,24 @@ public abstract class BaseComponent {
         this.image = image;
     }
 
+
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public void getX(float x) {
+        this.x = x;
+    }
+
+    public void getY(float y) {
+        this.y = y;
+    }
+
     public abstract void render();
     public abstract void update();
     public abstract void handleEvent();

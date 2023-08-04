@@ -12,6 +12,8 @@ public class ButtonExample extends BaseComponent implements ClickableComponent{
         super(x, y, ImageManager.getImage("asset/btn.png"));
     }
 
+
+
     @Override
     public void render() {
         GameVars.get("gc", GraphicsContext.class).drawImage(image, x, y);
