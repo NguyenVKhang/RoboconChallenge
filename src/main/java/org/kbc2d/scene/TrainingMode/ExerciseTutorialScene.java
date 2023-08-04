@@ -43,12 +43,6 @@ public class ExerciseTutorialScene extends BaseScene {
 
 //        GameVars.get("gc", javafx.scene.canvas.GraphicsContext.class).drawImage(webView.snapshot(null, null), 100, 100);
 
-
-
-
-
-
-
     }
 
     @Override
