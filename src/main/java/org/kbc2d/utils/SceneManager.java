@@ -2,6 +2,7 @@ package org.kbc2d.utils;
 
 import org.kbc2d.scene.*;
 import org.kbc2d.scene.TrainingMode.ExerciseTutorialScene;
+import org.kbc2d.scene.TrainingMode.QuestionTutorialScene;
 
 public class SceneManager {
     private static BaseScene currentScene;
@@ -32,6 +33,10 @@ public class SceneManager {
             case EXERCISE_TUTORIAL_SCENE:
                 currentScene = new ExerciseTutorialScene();
                 break;
+                case QUESTION_TUTORIAL_SCENE:
+                currentScene = new QuestionTutorialScene();
+                break;
+
         }
     }
 }
