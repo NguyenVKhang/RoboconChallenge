@@ -3,6 +3,7 @@ package org.kbc2d.scene;
 import org.kbc2d.game.object.Pole;
 import org.kbc2d.game.object.Ring;
 import org.kbc2d.game.object.Robot;
+import org.kbc2d.game.object.Type;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -11,8 +12,9 @@ import java.util.List;
 public class PvPScene extends BaseScene{
     List<Ring> rings = new ArrayList<>();
     List<Pole> poles = new ArrayList<>();
+    Robot enemy = new Robot(Type.RED_TEAM);
 
-    Robot robot = new Robot();
+    Robot robot = new Robot(Type.BLUE_TEAM);
 
     float velX;
     float velY;
@@ -24,17 +26,20 @@ public class PvPScene extends BaseScene{
     }
     @Override
     public void render() {
-        robot.render();
+
         for(int i = 0; i < rings.size(); i++) {
             rings.get(i).render();
         }
         for(int i = 0; i < poles.size(); i++) {
             poles.get(i).render();
         }
+        robot.render();
+        enemy.render();
     }
 
     @Override
     public void update(float deltaTime) {
+        enemy.update(deltaTime, rings, poles);
         robot.update(deltaTime, rings, poles);
         robot.update(rings, deltaTime);
         for(int i = 0 ; i < rings.size(); i++) {

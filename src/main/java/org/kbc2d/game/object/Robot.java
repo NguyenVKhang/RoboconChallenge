@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Robot extends BaseObject{
-    private int numberOfRing = 10;
+    private int numberOfRing;
     //    private static double height = 10;
     protected double swivelAngle;
 
@@ -28,8 +28,17 @@ public class Robot extends BaseObject{
 
     protected double forceChange;
 
-    public Robot() {
-        super(100, 100, ImageManager.getImage("asset/robot.png"));
+    public Robot(Type team) {
+        super();
+        if(team == Type.BLUE_TEAM) {
+            super.setImage(ImageManager.getImage("asset/robot.png"));
+            super.setPosition(0, 200);
+        }
+        else {
+            super.setImage(ImageManager.getImage("asset/robot_3DRed.png"));
+            super.setPosition(200, 200);
+        }
+        this.team = team;
         swivelAngle = 0;
         shootingAngle = 0;
         swivelAngleRotationSpeed = 50;
@@ -39,6 +48,7 @@ public class Robot extends BaseObject{
         forceChange = 10;
         super.setWidth(50);
         super.setHeight(50);
+        numberOfRing = 10;
 
     }
     @Override
@@ -63,45 +73,90 @@ public class Robot extends BaseObject{
 
 
     public void update(double deltaTime, List<Ring> rings, List<Pole> poles) {
-        if(Input.getInput().contains("W")) {
-            x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-            y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
-            if(!checkPoleCollision(poles)) {
-                x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-                y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
-            }
-        }
-        if(Input.getInput().contains("S")) {
-            x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-            y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
-            if(!checkPoleCollision(poles)) {
+        if(team == Type.BLUE_TEAM) {
+            if(Input.getInput().contains("W")) {
                 x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                 y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                if(!checkPoleCollision(poles)) {
+                    x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                    y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                }
             }
-        }
-        if(Input.getInput().contains("D")) {
-            swivelAngle += swivelAngleRotationSpeed * deltaTime;
-        }
-        if(Input.getInput().contains("A")) {
-            swivelAngle -= swivelAngleRotationSpeed * deltaTime;
-        }
-        if(Input.getInput().contains("Q")) {
-            shootingAngle += shootingAngleRotationSpeed * deltaTime;
-            if(shootingAngle > 90) shootingAngle = 90;
-        }
-        if(Input.getInput().contains("E")) {
-            shootingAngle -= shootingAngleRotationSpeed * deltaTime;
-            if(shootingAngle < 0) shootingAngle = 0;
-        }
-        if(Input.getInput().contains("F")) {
-            //check va chạm giữa người chơi và vòng
-            for (int i = rings.size() - 1; i >= 0; i--) {
-                if (rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
-                    rings.remove(i);
-                    this.setNumberOfRing(this.getNumberOfRing() + 1);
+            if(Input.getInput().contains("S")) {
+                x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                if(!checkPoleCollision(poles)) {
+                    x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                    y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                }
+            }
+            if(Input.getInput().contains("D")) {
+                swivelAngle += swivelAngleRotationSpeed * deltaTime;
+            }
+            if(Input.getInput().contains("A")) {
+                swivelAngle -= swivelAngleRotationSpeed * deltaTime;
+            }
+            if(Input.getInput().contains("Q")) {
+                shootingAngle += shootingAngleRotationSpeed * deltaTime;
+                if(shootingAngle > 90) shootingAngle = 90;
+            }
+            if(Input.getInput().contains("E")) {
+                shootingAngle -= shootingAngleRotationSpeed * deltaTime;
+                if(shootingAngle < 0) shootingAngle = 0;
+            }
+            if(Input.getInput().contains("F")) {
+                //check va chạm giữa người chơi và vòng
+                for (int i = rings.size() - 1; i >= 0; i--) {
+                    if (rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
+                        rings.remove(i);
+                        this.setNumberOfRing(this.getNumberOfRing() + 1);
+                    }
                 }
             }
         }
+        else {
+            if(Input.getInput().contains("UP")) {
+                x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                if(!checkPoleCollision(poles)) {
+                    x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                    y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                }
+            }
+            if(Input.getInput().contains("DOWN")) {
+                x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                if(!checkPoleCollision(poles)) {
+                    x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                    y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                }
+            }
+            if(Input.getInput().contains("RIGHT")) {
+                swivelAngle += swivelAngleRotationSpeed * deltaTime;
+            }
+            if(Input.getInput().contains("LEFT")) {
+                swivelAngle -= swivelAngleRotationSpeed * deltaTime;
+            }
+            if(Input.getInput().contains("NUMPAD7")) {
+                System.out.println("777");
+                shootingAngle += shootingAngleRotationSpeed * deltaTime;
+                if(shootingAngle > 90) shootingAngle = 90;
+            }
+            if(Input.getInput().contains("NUMPAD9")) {
+                shootingAngle -= shootingAngleRotationSpeed * deltaTime;
+                if(shootingAngle < 0) shootingAngle = 0;
+            }
+            if(Input.getInput().contains("NUMPAD5")) {
+                //check va chạm giữa người chơi và vòng
+                for (int i = rings.size() - 1; i >= 0; i--) {
+                    if (rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
+                        rings.remove(i);
+                        this.setNumberOfRing(this.getNumberOfRing() + 1);
+                    }
+                }
+            }
+        }
+
     }
 
     public boolean checkPoleCollision(List<Pole> poles) {

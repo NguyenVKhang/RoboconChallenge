@@ -58,6 +58,17 @@ public abstract class BaseObject
         this.image = image;
     }
 
+    public void setImage(Image image) {
+        this.image = image;
+        this.width = image.getWidth();
+        this.height = image.getHeight();
+    }
+
+    public void setPosition(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public void setHeight(double height) {
         this.height = height;
     }
