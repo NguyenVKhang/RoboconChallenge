@@ -34,17 +34,17 @@ public class HomeScene extends BaseScene{
     public HomeScene() {
         background = new BackgroundGame("asset/textures/ui/rectMenu/mainMenuBg.png");
 //        buttonExample = new ButtonExample(100, 100);
-        trainingModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 100, 250);
-        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingMode.png", 100, 320);
-        settingsButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Settings.png", 100, 390);
-        exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 600, 250);
-        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfMode.png", 600, 320);
+        trainingModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 200, 290);
+        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingMode.png", 200, 355);
+        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfMode.png", 200, 420);
+        exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 600, 290);
+        settingsButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Settings.png", 600, 355);
 
-        trainingModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingModeClick.png", 100, 250);
-        pvpModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 100, 320);
-        settingsButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/SettingsClick.png", 100, 390);
-        exitButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/ExitClick.png", 600, 250);
-        pveModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 600, 320);
+        trainingModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingModeClick.png", 200, 290);
+        pvpModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 200, 355);
+        pveModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 200, 420);
+        exitButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/ExitClick.png", 600, 290);
+        settingsButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/SettingsClick.png", 600, 355);
 
 
         train = trainingModeButton;
