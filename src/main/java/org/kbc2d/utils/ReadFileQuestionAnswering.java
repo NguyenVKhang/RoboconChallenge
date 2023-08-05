@@ -62,7 +62,9 @@ public class ReadFileQuestionAnswering {
                 }
             }
 
-            listQuestionAnswer.add(answerTrue);
+            // add first character of answerTrue to listQuestionAnswer
+
+            listQuestionAnswer.add(answerTrue.substring(0, 1));
 
 
             listQuestionAnswers.add(listQuestionAnswer);
