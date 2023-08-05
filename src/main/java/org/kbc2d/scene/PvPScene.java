@@ -38,17 +38,17 @@ public class PvPScene extends BaseScene{
     public PvPScene() {
         // khởi tạo thành phần của game
         //pole
-        Pole pole1 = new Pole(10, 10, 560, 280);
-        Pole pole2 = new Pole(10, 10, 480, 200);
-        Pole pole3 = new Pole(10, 10, 640 - 8/2, 360 - 8/2);
-        Pole pole4 = new Pole(10, 10, 480, 356);
-        Pole pole5 = new Pole(10, 10, 480, 512);
-        Pole pole6 = new Pole(10, 10, 792, 200);
-        Pole pole7 = new Pole(10, 10, 792, 356);
-        Pole pole8 = new Pole(10, 10, 792, 512);
-        Pole pole9 = new Pole(10, 10, 560, 432);
-        Pole pole10 = new Pole(10, 10, 712, 280);
-        Pole pole11 = new Pole(10, 10, 712, 432);
+        Pole pole1 = new Pole(10, 10, 480, 200,1);
+        Pole pole2 = new Pole(10, 10, 784, 200, 1);
+        Pole pole3 = new Pole(10, 10, 570, 290, 1);
+        Pole pole4 = new Pole(10, 10, 694, 290,1);
+        Pole pole5 = new Pole(10, 10, 480, 349,1);
+        Pole pole6 = new Pole(10, 10, 626, 341,3);
+        Pole pole7 = new Pole(10, 10, 784, 349,1);
+        Pole pole8 = new Pole(10, 10, 570, 414,1);
+        Pole pole9 = new Pole(10, 10, 694, 414,1);
+        Pole pole10 = new Pole(10, 10, 480, 504,1);
+        Pole pole11 = new Pole(10, 10, 784, 504,1);
 
         poles.add(pole3);
         poles.add(pole1);
@@ -163,59 +163,50 @@ public class PvPScene extends BaseScene{
         double distance = ring.getCenter().distanceTo(pole.getCenter());
         double sumOfHeights = ring.getWidth()/2 + pole.getWidth()/2;
         //vòng trúng vào cột
-        if( ring.getHigh() < pole.getHeightPole() && distance - 2 < ring.getWidth()/2-pole.getWidth()/2 && !ring.getIn()) {
+        if( ring.getHigh() < pole.getHeightPole() && distance - 2 < ring.getWidth()/2-pole.getWidth()/2 && pole.ringTop != ring) {
             if(ring.getTeam() == Type.BLUE_TEAM && pole.getTeam() == Type.RED_TEAM) {
-                System.out.println(1);
                 PointTeam1 += pole.getPoint();
                 PointTeam2 -= pole.getPoint();
                 pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
                 pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
             } else if(ring.getTeam() == Type.BLUE_TEAM && pole.getTeam() == Type.NO_TEAM) {
-                System.out.println(2);
                 PointTeam1 += pole.getPoint();
                 pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
             } else if(ring.getTeam() == Type.RED_TEAM && pole.getTeam() == Type.NO_TEAM) {
-                System.out.println(3);
                 PointTeam2 += pole.getPoint();
                 pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
             } else if(ring.getTeam() == Type.RED_TEAM && pole.getTeam() == Type.BLUE_TEAM) {
-                System.out.println(4);
                 PointTeam1 -= pole.getPoint();
                 PointTeam2 += pole.getPoint();
                 pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
                 pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
             }
-            System.out.println(ring.getTeam());
-            System.out.println(pole.getTeam());
-            System.out.println(5);
             ring.setIn(true);
             //check còn cột nào chưa có không
             isEndGame = true;
             pole.setTeam(ring.getTeam());
-
+            pole.ringTop = ring;
             for(int i = 0; i < poles.size(); i++) {
-                System.out.println(poles.get(i).getTeam());
-                System.out.println(ring.getTeam());
                 if(poles.get(i).getTeam() != ring.getTeam()) {
                     isEndGame = false;
                 }
             }
-            System.out.println(123456);
         }
 
         //vòng chạm vào cạnh của cột khi không vào cột
-        if (distance < sumOfHeights && ring.getHigh() < pole.getHeightPole() && !ring.getIn() && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) >= 0) {
-            System.out.println("abc");
+        if (distance < sumOfHeights && ring.getHigh() < pole.getHeightPole() && pole.ringTop != ring && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) >= 0) {
+//            double time = getTimeBack(ring, pole);
+//            ring.setPosition(ring.getPosition().x - time*ring.getSpeed().x, ring.getPosition().y - time*ring.getSpeed().y);
             // Khoảng cách gần bằng tổng chiều cao với sai số epsilon cho phép
             // Thực hiện các hành động tương ứng
-            Vector2D difference = ring.getSpeed().subtract(projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
+            Vector2D difference = ring.getSpeed().subtract((projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter())));
             Vector2D scaled = difference.multiply(2);
             ring.setSpeed(ring.getSpeed().subtract(scaled));
         }
 
         //vòng trúng vào cột và tiếp tục đập vào cột
-        if(ring.getIn() && distance + 2> ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
-            System.out.println(12345);
+        if(pole.ringTop == ring && distance > ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
+
             Vector2D difference = ring.getSpeed().subtract(projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
             Vector2D scaled = difference.multiply(2);
             ring.setSpeed(ring.getSpeed().subtract(scaled));
@@ -235,8 +226,23 @@ public class PvPScene extends BaseScene{
         return new Vector2D(projectionX, projectionY);
     }
 
+    double backPosition(Ring ring, Pole pole) {
+        double actualDistance = ring.getCenter().distanceTo(pole.getCenter());
+        double distance = ring.getWidth()/2+ pole.getWidth()/2;
+
+        return 1;
+    }
+    void backPosition2(Ring ring, Pole pole) {
+        double actualDistance = ring.getCenter().distanceTo(pole.getCenter());
+        double distance = ring.getWidth()/2 -  pole.getWidth()/2;
+        Vector2D sp = ring.getSpeed().subtract(projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
+        double time = ((actualDistance - distance - 1) / (ring.getSpeed().calculateMagnitude()));
+        ring.setPosition(ring.getPosition().x - time*sp.x, ring.getPosition().y - sp.y);
+    }
+
     @Override
     public void handleEvent() {
 
     }
+
 }
