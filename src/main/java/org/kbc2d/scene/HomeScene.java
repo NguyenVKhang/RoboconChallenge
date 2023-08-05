@@ -18,14 +18,14 @@ public class HomeScene extends BaseScene{
 //    ButtonGame settingsButtonC;
 //
 //    ButtonGame train;
-//    ButtonGame pve;
-//    ButtonGame pvp;
-//    ButtonGame settings;
-//    ButtonGame exit;
+    ButtonGame pveModeButton;
+    ButtonGame pvpModeButton;
+    ButtonGame settingsButton;
+    ButtonGame exitButton;
     BackgroundGame background;
 //    VBox vBox;
 
-    ButtonGame buttonExample;
+    ButtonGame trainingButton;
 
 
     public HomeScene() {
@@ -36,7 +36,7 @@ public class HomeScene extends BaseScene{
 //        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfMode.png", 200, 420);
 //        exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 600, 290);
 //        settingsButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Settings.png", 600, 355);
-//
+
 //        trainingModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingModeClick.png", 200, 290);
 //        pvpModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 200, 355);
 //        pveModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 200, 420);
@@ -49,7 +49,83 @@ public class HomeScene extends BaseScene{
 //        pve = pveModeButton;
 //        settings = settingsButton;
 //        exit = exitButton;
-        buttonExample = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 200, 290, new DoClick() {
+        exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 600, 290, new DoClick() {
+            @Override
+            public void doClick() {
+
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                exitButton.setImage("asset/textures/ui/rectMenu/ButtonSet/ExitClick.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                exitButton.setImage("asset/textures/ui/rectMenu/ButtonSet/Exit.png");
+
+            }
+
+        }
+        );
+        settingsButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Settings.png", 600, 355, new DoClick() {
+            @Override
+            public void doClick() {
+                SceneManager.setCurrentScene(SceneType.SETTING_SCENE);
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                settingsButton.setImage("asset/textures/ui/rectMenu/ButtonSet/SettingsClick.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                settingsButton.setImage("asset/textures/ui/rectMenu/ButtonSet/Settings.png");
+
+            }
+
+        }
+        );
+        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 200, 420, new DoClick() {
+            @Override
+            public void doClick() {
+                SceneManager.setCurrentScene(SceneType.PvE_SCENE);
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                pveModeButton.setImage("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                pveModeButton.setImage("asset/textures/ui/rectMenu/ButtonSet/selfMode.png");
+
+            }
+
+        }
+        );
+        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 200, 355, new DoClick() {
+            @Override
+            public void doClick() {
+                SceneManager.setCurrentScene(SceneType.PvP_SCENE);
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                pvpModeButton.setImage("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                pvpModeButton.setImage("asset/textures/ui/rectMenu/ButtonSet/fightingMode.png");
+
+            }
+
+        }
+        );
+        trainingButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 200, 290, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
@@ -57,20 +133,27 @@ public class HomeScene extends BaseScene{
         }, new DoHover() {
             @Override
             public void doHover() {
-                buttonExample.setImage("asset/textures/ui/rectMenu/ButtonSet/trainingModeClick.png");
+                trainingButton.setImage("asset/textures/ui/rectMenu/ButtonSet/trainingModeClick.png");
             }
         }, new DoNotHover() {
             @Override
             public void doNotHover() {
-                buttonExample.setImage("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png");
+                trainingButton.setImage("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png");
 
             }
 
         }
         );
-        Input.addObjHandleClick(buttonExample);
-        Input.addObjHandleHover(buttonExample);
-
+        Input.addObjHandleClick(trainingButton);
+        Input.addObjHandleHover(trainingButton);
+        Input.addObjHandleClick(pvpModeButton);
+        Input.addObjHandleHover(pvpModeButton);
+        Input.addObjHandleClick(pveModeButton);
+        Input.addObjHandleHover(pveModeButton);
+        Input.addObjHandleClick(settingsButton);
+        Input.addObjHandleHover(settingsButton);
+        Input.addObjHandleClick(exitButton);
+        Input.addObjHandleHover(exitButton);
     }
 
     @Override
@@ -80,11 +163,11 @@ public class HomeScene extends BaseScene{
 //
 //
 //        train.render();
-//        pvp.render();
-//        exit.render();
-//        pve.render();
-//        settings.render();
-        buttonExample.render();
+        pvpModeButton.render();
+        exitButton.render();
+        pveModeButton.render();
+        settingsButton.render();
+        trainingButton.render();
     }
 
     @Override
