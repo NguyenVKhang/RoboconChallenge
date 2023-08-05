@@ -136,7 +136,13 @@ public class Robot extends BaseObject{
                 y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 if(checkCollisionGameObject(gameObject)) {
                     x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-                    y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                    if(checkCollisionGameObject(gameObject)) {
+                        y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                        x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        if(checkCollisionGameObject(gameObject)) {
+                            x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        }
+                    }
                 }
             }
             if(Input.getInput().contains("DOWN")) {
@@ -144,7 +150,13 @@ public class Robot extends BaseObject{
                 y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 if(checkCollisionGameObject(gameObject)) {
                     x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-                    y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                    if(checkCollisionGameObject(gameObject)) {
+                        y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                        x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        if(checkCollisionGameObject(gameObject)) {
+                            x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        }
+                    }
                 }
             }
             if(Input.getInput().contains("RIGHT")) {
@@ -205,6 +217,9 @@ public class Robot extends BaseObject{
             if(checkCollision(gameObject.rivers.get(i), this)) {
                 return true;
             }
+        }
+        if(checkCollision(gameObject.centerFloor, this)) {
+            return true;
         }
         return checkPoleCollision(gameObject.poles);
     }

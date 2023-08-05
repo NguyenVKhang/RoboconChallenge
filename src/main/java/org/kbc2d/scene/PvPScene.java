@@ -16,7 +16,7 @@ import java.util.List;
 public class PvPScene extends BaseScene{
     public List<Ring> rings = new ArrayList<>();
     public List<River> rivers = new ArrayList<>();
-
+    public CenterFloor centerFloor;
     public boolean isEndGame;
     private double timeGame;
     public List<Pole> poles = new ArrayList<>();
@@ -37,6 +37,7 @@ public class PvPScene extends BaseScene{
     float velZ;
     public PvPScene() {
         // khởi tạo thành phần của game
+        centerFloor = new CenterFloor();
         //pole
         Pole pole1 = new Pole(10, 10, 480, 200,1);
         Pole pole2 = new Pole(10, 10, 784, 200, 1);
@@ -104,6 +105,7 @@ public class PvPScene extends BaseScene{
         floor.render();
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
         gc.drawImage(ImageManager.getImage("asset/Map.png"), 320, 40, 640, 640);
+//        centerFloor.render();
         for(int i = 0; i < rivers.size(); i++) {
             rivers.get(i).render();
         }
