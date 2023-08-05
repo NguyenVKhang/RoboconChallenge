@@ -181,8 +181,13 @@ public class Robot extends BaseObject{
 
     }
 
+<<<<<<< HEAD
     public boolean checkCollisionGameObject(GameScene gameObject)  {
         if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.x + gameObject.floor.getHeight())))) {
+=======
+    public boolean checkCollisionGameObject(PvPScene gameObject)  {
+        if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.y + gameObject.floor.getHeight())))) {
+>>>>>>> 267a713da55b51d59e2e45ae280496d86180101e
             System.out.println(x);
             System.out.println(gameObject.floor.x);
             System.out.println(y);
@@ -192,7 +197,7 @@ public class Robot extends BaseObject{
             System.out.println( y + height);
             System.out.println(gameObject.floor.x + gameObject.floor.getHeight());
             System.out.println(123);
-            System.out.println((x < gameObject.floor.x || y < gameObject.floor.y || x+width > gameObject.floor.x + gameObject.floor.getWidth() || y + height < gameObject.floor.x + gameObject.floor.getHeight()));
+            System.out.println((x < gameObject.floor.x || y < gameObject.floor.y || x+width > gameObject.floor.x + gameObject.floor.getWidth() || y + height < gameObject.floor.y + gameObject.floor.getHeight()));
             return true;
         }
         if(this.team == Type.RED_TEAM && ((x < gameObject.floorEnemy.x) || (y < gameObject.floorEnemy.y) || ((x+width) > (gameObject.floorEnemy.x + gameObject.floorEnemy.getWidth()) || ((y + height) > (gameObject.floorEnemy.y + gameObject.floorEnemy.getHeight()))))) {

@@ -1,8 +1,12 @@
 package org.kbc2d.scene;
 
+import org.kbc2d.game.GameStatic;
 import org.kbc2d.game.ui.*;
 import org.kbc2d.utils.Input;
+import org.kbc2d.utils.ReadFileQuestionAnswering;
 import org.kbc2d.utils.SceneManager;
+
+import org.kbc2d.game.GameStatic.*;
 
 public class HomeScene extends BaseScene{
 
@@ -15,12 +19,22 @@ public class HomeScene extends BaseScene{
     ButtonGame trainingButton;
 
 
+    // load first data from database
+    public void loadData() {
+        ReadFileQuestionAnswering readFileQuestionAnswering = new ReadFileQuestionAnswering("src/main/resources/org/kbc2d/asset/data/level_unlock.txt");
+        String s = readFileQuestionAnswering.getTextInFile();
+
+        GameStatic.UNLOCK_LEVEL = Integer.parseInt(s.charAt(0) + "");
+    }
+
     public HomeScene() {
+        loadData();
         background = new BackgroundGame("asset/textures/ui/rectMenu/mainMenuBg.png");
 
         exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 800, 350, new DoClick() {
             @Override
             public void doClick() {
+                System.exit(0);
 
             }
         }, new DoHover() {
@@ -56,7 +70,7 @@ public class HomeScene extends BaseScene{
 
         }
         );
-        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 270, 550, new DoClick() {
+        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfMode.png", 270, 550, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.PvE_SCENE);
@@ -75,7 +89,7 @@ public class HomeScene extends BaseScene{
 
         }
         );
-        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 270, 450, new DoClick() {
+        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingMode.png", 270, 450, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.PvP_SCENE);
