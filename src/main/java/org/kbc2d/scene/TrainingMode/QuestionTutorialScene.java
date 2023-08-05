@@ -19,8 +19,7 @@ public class QuestionTutorialScene extends BaseScene {
     public static final int STATUS_IMAGE = 3;
     BackgroundGame backgroundGame;
     ButtonGame backGame;
-
-
+    TextFieldGame textInput;
     ButtonGame checkAnswer;
 //    TextGame textGame;
     TextGame textQuestionAnswer;
@@ -43,11 +42,13 @@ public class QuestionTutorialScene extends BaseScene {
 
 
     public QuestionTutorialScene() {
-        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/mainMenuBg.png");
+        textInput = new TextFieldGame(700, 700, 100, 50);
+        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
 //
         backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525, new DoClick() {
             @Override
             public void doClick() {
+                SceneManager.setCurrentScene(SceneType.EXERCISE_TUTORIAL_SCENE);
 
             }
 
@@ -154,7 +155,7 @@ public class QuestionTutorialScene extends BaseScene {
         if (indexQuestionAnswer != 10) {
             checkAnswer.render();
         }
-
+        textInput.render();
 //
 //
 //        for (int i = 0; i < IMAGE_HIDDEN; i++) {
