@@ -33,7 +33,7 @@ public class PvPScene extends BaseScene{
 
     public List<Ring> rings = new ArrayList<>();
     public List<River> rivers = new ArrayList<>();
-
+    public CenterFloor centerFloor;
     public boolean isEndGame;
     private double timeGame;
     public List<Pole> poles = new ArrayList<>();
@@ -53,8 +53,8 @@ public class PvPScene extends BaseScene{
     float velZ;
     public PvPScene() {
         /// UI
-        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/mainMenuBg.png");
-        time_string = new TextGame("Time Left: ", 1030, 100);
+        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
+        time_string = new TextGame("Time Left: ", 1030, 150);
         font_info = Font.font("Arial", FontWeight.BOLD, 40);
 
         pointString1 = new TextGame(Integer.toString(PointTeam1), 70, 400);
@@ -67,6 +67,7 @@ public class PvPScene extends BaseScene{
 
 
         // khởi tạo thành phần của game
+        centerFloor = new CenterFloor();
         //pole
         Pole pole1 = new Pole(10, 10, 480, 200,1);
         Pole pole2 = new Pole(10, 10, 784, 200, 1);
@@ -131,11 +132,8 @@ public class PvPScene extends BaseScene{
     @Override
     public void render() {
         /// UI
-//        backgroundGame.render();
+        backgroundGame.render();
         GameVars.get("gc", GraphicsContext.class).save();
-        GameVars.get("gc", GraphicsContext.class).setFill(Color.WHITE);
-        GameVars.get("gc", GraphicsContext.class).fillRect(0, 0, GlobalConstant.SCREEN_WIDTH, GlobalConstant.SCREEN_HEIGHT);
-
         GameVars.get("gc", GraphicsContext.class).setFill(Color.BLACK);
 
         int second = (int)timeGame % 60;
@@ -175,6 +173,7 @@ public class PvPScene extends BaseScene{
         floor.render();
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
         gc.drawImage(ImageManager.getImage("asset/Map.png"), 320, 40, 640, 640);
+//        centerFloor.render();
         for(int i = 0; i < rivers.size(); i++) {
             rivers.get(i).render();
         }
@@ -186,11 +185,11 @@ public class PvPScene extends BaseScene{
         }
         robot.render();
         enemy.render();
-
-        pointString1.render();
-
-
-        pointString2.render();
+//
+//        pointString1.render();
+//
+//
+//        pointString2.render();
     }
 
     @Override
@@ -235,31 +234,24 @@ public class PvPScene extends BaseScene{
         double sumOfHeights = ring.getWidth()/2 + pole.getWidth()/2;
         //vòng trúng vào cột
         if( ring.getHigh() < pole.getHeightPole() && distance - 2 < ring.getWidth()/2-pole.getWidth()/2 && pole.ringTop != ring) {
-            if(ring.getTeam() == Type.BLUE_TEAM && pole.getTeam() == Type.RED_TEAM) {
-                PointTeam1 += pole.getPoint();
-                PointTeam2 -= pole.getPoint();
-                pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
-                pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
-            } else if(ring.getTeam() == Type.BLUE_TEAM && pole.getTeam() == Type.NO_TEAM) {
-                PointTeam1 += pole.getPoint();
-                pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
-            } else if(ring.getTeam() == Type.RED_TEAM && pole.getTeam() == Type.NO_TEAM) {
-                PointTeam2 += pole.getPoint();
-                pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
-            } else if(ring.getTeam() == Type.RED_TEAM && pole.getTeam() == Type.BLUE_TEAM) {
-                PointTeam1 -= pole.getPoint();
-                PointTeam2 += pole.getPoint();
-                pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
-                pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
-            }
-            ring.setIn(true);
-            //check còn cột nào chưa có không
-            isEndGame = true;
             pole.setTeam(ring.getTeam());
             pole.ringTop = ring;
+            isEndGame = true;
             for(int i = 0; i < poles.size(); i++) {
                 if(poles.get(i).getTeam() != ring.getTeam()) {
                     isEndGame = false;
+                }
+            }
+            PointTeam1 = 0;
+            PointTeam2 = 0;
+            for(int i = 0; i< poles.size(); i++) {
+                if(poles.get(i).ringTop == null) {
+                    continue;
+                }
+                if(poles.get(i).ringTop.getTeam() == Type.BLUE_TEAM) {
+                    PointTeam1 += poles.get(i).getPoint();
+                } else if(poles.get(i).ringTop.getTeam() == Type.RED_TEAM) {
+                    PointTeam2 += poles.get(i).getPoint();
                 }
             }
         }

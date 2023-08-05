@@ -136,7 +136,13 @@ public class Robot extends BaseObject{
                 y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 if(checkCollisionGameObject(gameObject)) {
                     x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-                    y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                    if(checkCollisionGameObject(gameObject)) {
+                        y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                        x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        if(checkCollisionGameObject(gameObject)) {
+                            x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        }
+                    }
                 }
             }
             if(Input.getInput().contains("DOWN")) {
@@ -144,7 +150,13 @@ public class Robot extends BaseObject{
                 y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 if(checkCollisionGameObject(gameObject)) {
                     x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-                    y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                    if(checkCollisionGameObject(gameObject)) {
+                        y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                        x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        if(checkCollisionGameObject(gameObject)) {
+                            x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        }
+                    }
                 }
             }
             if(Input.getInput().contains("RIGHT")) {
@@ -176,7 +188,7 @@ public class Robot extends BaseObject{
     }
 
     public boolean checkCollisionGameObject(PvPScene gameObject)  {
-        if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.x + gameObject.floor.getHeight())))) {
+        if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.y + gameObject.floor.getHeight())))) {
             System.out.println(x);
             System.out.println(gameObject.floor.x);
             System.out.println(y);
@@ -186,7 +198,7 @@ public class Robot extends BaseObject{
             System.out.println( y + height);
             System.out.println(gameObject.floor.x + gameObject.floor.getHeight());
             System.out.println(123);
-            System.out.println((x < gameObject.floor.x || y < gameObject.floor.y || x+width > gameObject.floor.x + gameObject.floor.getWidth() || y + height < gameObject.floor.x + gameObject.floor.getHeight()));
+            System.out.println((x < gameObject.floor.x || y < gameObject.floor.y || x+width > gameObject.floor.x + gameObject.floor.getWidth() || y + height < gameObject.floor.y + gameObject.floor.getHeight()));
             return true;
         }
         if(this.team == Type.RED_TEAM && ((x < gameObject.floorEnemy.x) || (y < gameObject.floorEnemy.y) || ((x+width) > (gameObject.floorEnemy.x + gameObject.floorEnemy.getWidth()) || ((y + height) > (gameObject.floorEnemy.y + gameObject.floorEnemy.getHeight()))))) {
@@ -205,6 +217,9 @@ public class Robot extends BaseObject{
             if(checkCollision(gameObject.rivers.get(i), this)) {
                 return true;
             }
+        }
+        if(checkCollision(gameObject.centerFloor, this)) {
+            return true;
         }
         return checkPoleCollision(gameObject.poles);
     }

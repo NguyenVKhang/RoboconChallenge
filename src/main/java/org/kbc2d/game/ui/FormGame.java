@@ -85,12 +85,14 @@ public class FormGame extends BaseComponent implements ClickableComponent, Hover
 
         // set size text
         GameVars.get("gc", GraphicsContext.class).restore();
-
+        GameVars.get("gc", GraphicsContext.class).save();
 
         GameVars.get("gc", GraphicsContext.class).setFont(Font.font("Arial", FontWeight.BOLD, textSize));
+        GameVars.get("gc", GraphicsContext.class).setFill(Color.BLACK);
+
 
         GameVars.get("gc", GraphicsContext.class).fillText(textInRectangle, rectangle.getX() + 15, rectangle.getY() + 3 * textSize/2);
-
+        GameVars.get("gc", GraphicsContext.class).restore();
     }
 
     @Override

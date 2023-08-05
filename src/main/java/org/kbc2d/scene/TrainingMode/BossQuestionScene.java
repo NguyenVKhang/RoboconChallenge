@@ -2,6 +2,7 @@ package org.kbc2d.scene.TrainingMode;
 
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
+import org.kbc2d.game.GameStatic;
 import org.kbc2d.game.GameVars;
 import org.kbc2d.game.ui.*;
 import org.kbc2d.scene.BaseScene;
@@ -35,8 +36,10 @@ public class BossQuestionScene extends BaseScene {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(answer)) {
-                    System.out.println("Chúc mừng bạn vượt qua mức 1");
+                    System.out.println("Chúc mừng bạn vượt qua mức " + UNLOCK_LEVEL);
                     UNLOCK_LEVEL += 1;
+                    // save to file
+                    GameStatic.saveGame();
                     SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
 
                 } else {

@@ -24,16 +24,18 @@ public class VideoGame extends BaseComponent {
     public VideoGame(String path, int x, int y) {
         this.xRender = x;
         this.yRender = y;
-        buttonPlay = new ButtonGame("asset\\textures\\ui\\hexMenu\\play.png", (xRender), (yRender + 353), new DoClick() {
+        buttonPlay = new ButtonGame("asset\\textures\\ui\\hexMenu\\pause.png", (xRender), (yRender + 353), new DoClick() {
             @Override
             public void doClick() {
                 if (!play) {
                     stop();
                     play = true;
+                    buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\play.png");
                 }
                 else {
                     start();
                     play = false;
+                    buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\pause.png");
                 }
 
 
@@ -42,12 +44,22 @@ public class VideoGame extends BaseComponent {
                 , new DoHover() {
             @Override
             public void doHover() {
-                buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\playHover.png");
+                if(play == false) {
+                    buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\pauseHover.png");
+                } else {
+                    buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\playHover.png");
+                }
+
             }
         }, new DoNotHover() {
             @Override
             public void doNotHover() {
-                buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\play.png");
+                if (play == false) {
+                    buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\pause.png");
+                } else {
+                    buttonPlay.setImage("asset\\textures\\ui\\hexMenu\\play.png");
+                }
+
             }
 
 
