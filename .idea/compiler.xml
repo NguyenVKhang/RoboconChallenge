@@ -9,8 +9,5 @@
         <module name="robocon-challenge" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="RoboconChallenge" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

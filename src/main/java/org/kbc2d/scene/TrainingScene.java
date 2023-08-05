@@ -6,9 +6,11 @@ import org.kbc2d.game.ui.BackgroundGame;
 import org.kbc2d.game.ui.ButtonGame;
 import org.kbc2d.utils.SceneManager;
 
+import static org.kbc2d.game.ui.GameStatic.UNLOCK_LEVEL;
+
 public class TrainingScene extends BaseScene {
     public static final int LEVEL_TUTORIAL = 8;
-    public static int unLock = 1;
+
 
     ButtonGame[] button = new ButtonGame[LEVEL_TUTORIAL];
     ButtonGame[] buttonGames = new ButtonGame[LEVEL_TUTORIAL];
@@ -36,7 +38,7 @@ public class TrainingScene extends BaseScene {
         buttonGamesC[0] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round1C.png", 135, 50);
         buttonGamesC[1] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round2C.png", 135, 50);
 
-        for(int i = 0; i < unLock; i++) {
+        for(int i = 0; i < UNLOCK_LEVEL; i++) {
             button[i] = buttonGames[i];
         }
 //        for (int i = 4; i < LEVEL_TUTORIAL; i++) {
@@ -63,7 +65,7 @@ public class TrainingScene extends BaseScene {
     public void handleEvent() {
         GameVars.get("scene", Scene.class).setOnMouseMoved(
                 mouseEvent -> {
-                    for(int i = unLock; i < LEVEL_TUTORIAL; i ++){
+                    for(int i = UNLOCK_LEVEL; i < LEVEL_TUTORIAL; i ++){
                         if (button[i].handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
                             button[i] = buttonGamesLC[i];
                         }
@@ -71,7 +73,7 @@ public class TrainingScene extends BaseScene {
                             button[i] = buttonGamesL[i];
                         }
                     }
-                    for(int i = 0; i < unLock; i ++){
+                    for(int i = 0; i < UNLOCK_LEVEL; i ++){
                         if (button[i].handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
                             button[i] = buttonGamesC[i];
                         }
@@ -93,7 +95,7 @@ public class TrainingScene extends BaseScene {
                         SceneManager.setCurrentScene(SceneType.HOME_SCENE);
                     }
 
-                    for(int i = 0; i < unLock; i ++) {
+                    for(int i = 0; i < UNLOCK_LEVEL; i ++) {
                         if(button[i].handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
                             SceneManager.setCurrentScene(SceneType.EXERCISE_TUTORIAL_SCENE);
                         }
