@@ -1,18 +1,12 @@
 package org.kbc2d.game.object;
 
-import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import org.kbc2d.game.GameVars;
-import org.kbc2d.scene.BaseScene;
-import org.kbc2d.scene.PvPScene;
+import org.kbc2d.scene.GameScene;
 import org.kbc2d.scene.Vector2D;
 import org.kbc2d.utils.ImageManager;
 import org.kbc2d.utils.Input;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Robot extends BaseObject{
@@ -76,7 +70,7 @@ public class Robot extends BaseObject{
     }
 
 
-    public void update(double deltaTime, PvPScene gameObject) {
+    public void update(double deltaTime, GameScene gameObject) {
         if(team == Type.BLUE_TEAM) {
             if(Input.getInput().contains("W")) {
                 x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
@@ -187,7 +181,7 @@ public class Robot extends BaseObject{
 
     }
 
-    public boolean checkCollisionGameObject(PvPScene gameObject)  {
+    public boolean checkCollisionGameObject(GameScene gameObject)  {
         if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.x + gameObject.floor.getHeight())))) {
             System.out.println(x);
             System.out.println(gameObject.floor.x);
