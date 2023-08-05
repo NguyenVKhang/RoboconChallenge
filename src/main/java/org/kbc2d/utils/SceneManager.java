@@ -12,6 +12,8 @@ public class SceneManager {
     }
 
     public static void setCurrentScene(SceneType type) {
+        Input.clearListObjHandleClick();
+        Input.clearListObjHandleHover();
         switch (type) {
             case HOME_SCENE:
                 currentScene = new HomeScene();
