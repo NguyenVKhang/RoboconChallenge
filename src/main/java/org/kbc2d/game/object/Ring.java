@@ -1,7 +1,6 @@
 package org.kbc2d.game.object;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import org.kbc2d.game.GameVars;
 import org.kbc2d.scene.Vector2D;
 import org.kbc2d.utils.ImageManager;
@@ -57,9 +56,7 @@ public class Ring extends BaseObject{
     public void setIn(boolean in) {
         isIn = in;
     }
-    public boolean getIn() {
-        return this.isIn;
-    }
+
 
     @Override
     public void render() {
@@ -119,6 +116,8 @@ public class Ring extends BaseObject{
     public double getHigh() {
         return high;
     }
-
+    public Vector2D getPosition() {
+        return new Vector2D(x, y);
+    }
 }
 

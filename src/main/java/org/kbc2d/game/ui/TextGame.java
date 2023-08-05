@@ -22,7 +22,6 @@ public class TextGame extends BaseComponent {
 
     public void setFont_(Font font) {
 //        text_.setFont(font);
-        System.out.println("font: " + font);
         this.font = font;
     }
     public void setColor(Color color) {
