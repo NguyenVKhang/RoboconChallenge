@@ -21,6 +21,7 @@ public class HomeScene extends BaseScene{
         exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 800, 350, new DoClick() {
             @Override
             public void doClick() {
+                System.exit(0);
 
             }
         }, new DoHover() {
