@@ -22,6 +22,8 @@ public class Pole extends BaseObject {
         gc.fillText("height = " + heightPole , this.x, this.y);
     }
 
+
+
     @Override
     public void update(double deltaTime) {
 

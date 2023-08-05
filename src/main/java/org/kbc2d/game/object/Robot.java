@@ -1,10 +1,13 @@
 package org.kbc2d.game.object;
 
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import org.kbc2d.game.GameVars;
 import org.kbc2d.scene.BaseScene;
+import org.kbc2d.scene.PvPScene;
 import org.kbc2d.scene.Vector2D;
 import org.kbc2d.utils.ImageManager;
 import org.kbc2d.utils.Input;
@@ -36,7 +39,7 @@ public class Robot extends BaseObject{
         }
         else {
             super.setImage(ImageManager.getImage("asset/robot_3DRed.png"));
-            super.setPosition(200, 200);
+            super.setPosition(300, 200);
         }
         this.team = team;
         swivelAngle = 0;
@@ -62,8 +65,8 @@ public class Robot extends BaseObject{
         gc.drawImage(image, -width / 2, -height / 2, width, height);
         gc.restore();
         gc.strokeRect(x, y, width, height);
-        gc.fillText("Shooting angle = " + shootingAngle, 100, 100);
-        gc.fillText("Force = " + force, 100, 120);
+        gc.fillText("Shooting angle = " + (int) shootingAngle, x-20, y-20);
+        gc.fillText("Force = " + (int) force, x-10, y-10);
     }
 
     @Override
@@ -72,12 +75,12 @@ public class Robot extends BaseObject{
     }
 
 
-    public void update(double deltaTime, List<Ring> rings, List<Pole> poles) {
+    public void update(double deltaTime, PvPScene gameObject) {
         if(team == Type.BLUE_TEAM) {
             if(Input.getInput().contains("W")) {
                 x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                 y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
-                if(!checkPoleCollision(poles)) {
+                if(checkCollisionGameObject(gameObject)) {
                     x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                     y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 }
@@ -85,7 +88,7 @@ public class Robot extends BaseObject{
             if(Input.getInput().contains("S")) {
                 x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                 y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
-                if(!checkPoleCollision(poles)) {
+                if(checkCollisionGameObject(gameObject)) {
                     x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                     y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 }
@@ -106,9 +109,9 @@ public class Robot extends BaseObject{
             }
             if(Input.getInput().contains("F")) {
                 //check va chạm giữa người chơi và vòng
-                for (int i = rings.size() - 1; i >= 0; i--) {
-                    if (rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
-                        rings.remove(i);
+                for (int i = gameObject.rings.size() - 1; i >= 0; i--) {
+                    if (gameObject.rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
+                        gameObject.rings.remove(i);
                         this.setNumberOfRing(this.getNumberOfRing() + 1);
                     }
                 }
@@ -118,7 +121,7 @@ public class Robot extends BaseObject{
             if(Input.getInput().contains("UP")) {
                 x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                 y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
-                if(!checkPoleCollision(poles)) {
+                if(checkCollisionGameObject(gameObject)) {
                     x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                     y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 }
@@ -126,7 +129,7 @@ public class Robot extends BaseObject{
             if(Input.getInput().contains("DOWN")) {
                 x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                 y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
-                if(!checkPoleCollision(poles)) {
+                if(checkCollisionGameObject(gameObject)) {
                     x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
                     y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 }
@@ -148,9 +151,9 @@ public class Robot extends BaseObject{
             }
             if(Input.getInput().contains("NUMPAD5")) {
                 //check va chạm giữa người chơi và vòng
-                for (int i = rings.size() - 1; i >= 0; i--) {
-                    if (rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
-                        rings.remove(i);
+                for (int i = gameObject.rings.size() - 1; i >= 0; i--) {
+                    if (gameObject.rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
+                        gameObject.rings.remove(i);
                         this.setNumberOfRing(this.getNumberOfRing() + 1);
                     }
                 }
@@ -159,39 +162,77 @@ public class Robot extends BaseObject{
 
     }
 
+    public boolean checkCollisionGameObject(PvPScene gameObject)  {
+        if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.x + gameObject.floor.getHeight())))) {
+            System.out.println(x);
+            System.out.println(gameObject.floor.x);
+            System.out.println(y);
+            System.out.println(gameObject.floor.y);
+            System.out.println(x+width);
+            System.out.println(gameObject.floor.x + gameObject.floor.getWidth());
+            System.out.println( y + height);
+            System.out.println(gameObject.floor.x + gameObject.floor.getHeight());
+            System.out.println(123);
+            System.out.println((x < gameObject.floor.x || y < gameObject.floor.y || x+width > gameObject.floor.x + gameObject.floor.getWidth() || y + height < gameObject.floor.x + gameObject.floor.getHeight()));
+            return true;
+        }
+        if(this.team == Type.RED_TEAM && ((x < gameObject.floorEnemy.x) || (y < gameObject.floorEnemy.y) || ((x+width) > (gameObject.floorEnemy.x + gameObject.floorEnemy.getWidth()) || ((y + height) > (gameObject.floorEnemy.x + gameObject.floorEnemy.getHeight()))))) {
+            System.out.println(x);
+            System.out.println(y);
+            System.out.println(width);
+            System.out.println(height);
+            System.out.println(gameObject.floorEnemy.x);
+            System.out.println(gameObject.floorEnemy.y);
+            System.out.println(gameObject.floorEnemy.getWidth());
+            System.out.println(gameObject.floorEnemy.getHeight());
+            System.out.println(123);
+            return true;
+        }
+        return checkPoleCollision(gameObject.poles);
+    }
     public boolean checkPoleCollision(List<Pole> poles) {
-        boolean isColliding = false;
-        for (int i = 0; i < poles.size(); i++) {
-            Rectangle rect = new Rectangle(poles.get(i).getWidth(), poles.get(i).getHeight());
-            rect.setTranslateX(poles.get(i).getCenter().x - poles.get(i).getWidth() / 2);
-            rect.setTranslateY(poles.get(i).getCenter().y - poles.get(i).getHeight() / 2);
-
-            Circle circle = new Circle(poles.get(i).getCenter().x, poles.get(i).getCenter().y, poles.get(i).getHeight());
-
-            if (rect.getBoundsInParent().intersects(circle.getBoundsInParent())) {
-                isColliding = true;
-                break;
+        for(int i = 0; i < poles.size(); i++) {
+            if(this.getCenter().distanceTo(poles.get(i).getCenter()) < width/2+poles.get(i).getWidth()/2) {
+                return true;
             }
         }
-
-        return isColliding;
+        return false;
     }
 
     public void update(List<Ring> rings, double deltaTime) {
-        if(Input.getInput().contains("SPACE")) {
-            force += forceChange * deltaTime;
-            if(force > 100) {
-                force = 100;
-                forceChange = -forceChange;
-            } else if(force < 0) {
+        if(this.team == Type.BLUE_TEAM) {
+            if(Input.getInput().contains("SPACE")) {
+                force += forceChange * deltaTime;
+                if(force > 100) {
+                    force = 100;
+                    forceChange = -forceChange;
+                } else if(force < 0) {
+                    force = 0;
+                    forceChange = -forceChange;
+                }
+            }
+            else if(force != 0) {
+                Shoot(force, rings);
                 force = 0;
-                forceChange = -forceChange;
             }
         }
-        else if(force != 0) {
-            Shoot(force, rings);
-            force = 0;
+        else {
+            if(Input.getInput().contains("NUMPAD0")) {
+                force += forceChange * deltaTime;
+                if(force > 100) {
+                    force = 100;
+                    forceChange = -forceChange;
+                } else if(force < 0) {
+                    force = 0;
+                    forceChange = -forceChange;
+                }
+            }
+            else if(force != 0) {
+                Shoot(force, rings);
+                force = 0;
+            }
         }
+
     }
 
 
@@ -206,7 +247,7 @@ public class Robot extends BaseObject{
             double vx = vxy*Math.cos(Math.toRadians(swivelAngle));
             double vy = vxy*Math.sin(Math.toRadians(swivelAngle));
             System.out.println(v);
-            Ring ring = new Ring(this.x + width/2 - Ring.widthRing/2, this.y + height/2-Ring.heightRing/2, vx, vy, vz, 10);
+            Ring ring = new Ring(this.x + width/2 - Ring.widthRing/2, this.y + height/2-Ring.heightRing/2, vx, vy, vz, 10, team);
             rings.add(ring);
             numberOfRing --;
         }
