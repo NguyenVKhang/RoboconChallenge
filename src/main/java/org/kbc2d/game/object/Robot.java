@@ -181,13 +181,8 @@ public class Robot extends BaseObject{
 
     }
 
-<<<<<<< HEAD
     public boolean checkCollisionGameObject(GameScene gameObject)  {
         if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.x + gameObject.floor.getHeight())))) {
-=======
-    public boolean checkCollisionGameObject(PvPScene gameObject)  {
-        if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.y + gameObject.floor.getHeight())))) {
->>>>>>> 267a713da55b51d59e2e45ae280496d86180101e
             System.out.println(x);
             System.out.println(gameObject.floor.x);
             System.out.println(y);
