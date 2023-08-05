@@ -88,4 +88,27 @@ public abstract class BaseObject
     public double getWidth() {
         return width;
     }
+
+    public static boolean checkCollision(BaseObject a, BaseObject b) {
+        // Calculate the sides of rect A
+        double leftA = a.x;
+        double rightA = a.x + a.getWidth();
+        double topA = a.y;
+        double bottomA = a.y + a.getHeight();
+
+        // Calculate the sides of rect B
+        double leftB = b.x;
+        double rightB = b.x + b.getWidth();
+        double topB = b.y;
+        double bottomB = b.y + b.getHeight();
+
+        // Check for collision
+        if (bottomA <= topB || topA >= bottomB || rightA <= leftB || leftA >= rightB) {
+            // No collision
+            return false;
+        }
+
+        // Collision detected
+        return true;
+    }
 }

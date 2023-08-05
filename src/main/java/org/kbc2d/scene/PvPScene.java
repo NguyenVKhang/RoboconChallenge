@@ -15,6 +15,8 @@ import java.util.List;
 
 public class PvPScene extends BaseScene{
     public List<Ring> rings = new ArrayList<>();
+    public List<River> rivers = new ArrayList<>();
+
     public boolean isEndGame;
     private double timeGame;
     public List<Pole> poles = new ArrayList<>();
@@ -71,6 +73,27 @@ public class PvPScene extends BaseScene{
             rings.add(ring3);
             rings.add(ring4);
         }
+        //rivers
+        for(int i = 0; i < 12; i++) {
+            River river1 = new River(448, 168+32*i);
+            River river2 = new River(800, 168+32*i);
+            rivers.add(river1);
+            rivers.add(river2);
+        }
+        for(int i = 0; i < 10; i++) {
+            if(i == 5 || i == 6) {
+                continue;
+            }
+            River river = new River(480+i*32, 168);
+            rivers.add(river);
+        }
+        for(int i = 0; i < 10; i++) {
+            if(i == 3 || i == 4) {
+                continue;
+            }
+            River river = new River(480+i*32, 520);
+            rivers.add(river);
+        }
         isEndGame = false;
         timeGame = 180;
         background = ImageManager.getImage("asset/Map.png");
@@ -81,6 +104,9 @@ public class PvPScene extends BaseScene{
         floor.render();
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
         gc.drawImage(ImageManager.getImage("asset/Map.png"), 320, 40, 640, 640);
+        for(int i = 0; i < rivers.size(); i++) {
+            rivers.get(i).render();
+        }
         for(int i = 0; i < rings.size(); i++) {
             rings.get(i).render();
         }

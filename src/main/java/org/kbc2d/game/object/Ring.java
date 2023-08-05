@@ -31,8 +31,8 @@ public class Ring extends BaseObject{
         }
         this.x = x;
         this.y = y;
-        this.setWidth(widthRing);
-        this.setHeight(heightRing);
+        this.setWidth(32);
+        this.setHeight(32);
     }
     public Ring(double x, double y, double speedX, double speedY, double speedZ, double height, Type team) {
         super();

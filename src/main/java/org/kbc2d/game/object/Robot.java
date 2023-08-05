@@ -35,12 +35,12 @@ public class Robot extends BaseObject{
         super();
         if(team == Type.BLUE_TEAM) {
             super.setImage(ImageManager.getImage("asset/robot.png"));
-            super.setPosition(320, 336);
+            super.setPosition(320, 344);
             swivelAngle = 0;
         }
         else {
             super.setImage(ImageManager.getImage("asset/robot_3DRed.png"));
-            super.setPosition(912, 336);
+            super.setPosition(928, 344);
             swivelAngle = -180;
         }
         this.team = team;
@@ -50,8 +50,8 @@ public class Robot extends BaseObject{
         speed = 75;
         force = 0;
         forceChange = 10;
-        super.setWidth(48);
-        super.setHeight(48);
+        super.setWidth(32);
+        super.setHeight(32);
         numberOfRing = 0;
 
     }
@@ -83,7 +83,13 @@ public class Robot extends BaseObject{
                 y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 if(checkCollisionGameObject(gameObject)) {
                     x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-                    y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                    if(checkCollisionGameObject(gameObject)) {
+                        y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                        x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        if(checkCollisionGameObject(gameObject)) {
+                            x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        }
+                    }
                 }
             }
             if(Input.getInput().contains("S")) {
@@ -91,7 +97,13 @@ public class Robot extends BaseObject{
                 y -= (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
                 if(checkCollisionGameObject(gameObject)) {
                     x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
-                    y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                    if(checkCollisionGameObject(gameObject)) {
+                        y += (double) (deltaTime * speed * Math.sin(swivelAngle / 180 * Math.PI));
+                        x -= (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        if(checkCollisionGameObject(gameObject)) {
+                            x += (double) (deltaTime * speed * Math.cos(swivelAngle / 180 * Math.PI));
+                        }
+                    }
                 }
             }
             if(Input.getInput().contains("D")) {
@@ -177,7 +189,7 @@ public class Robot extends BaseObject{
             System.out.println((x < gameObject.floor.x || y < gameObject.floor.y || x+width > gameObject.floor.x + gameObject.floor.getWidth() || y + height < gameObject.floor.x + gameObject.floor.getHeight()));
             return true;
         }
-        if(this.team == Type.RED_TEAM && ((x < gameObject.floorEnemy.x) || (y < gameObject.floorEnemy.y) || ((x+width) > (gameObject.floorEnemy.x + gameObject.floorEnemy.getWidth()) || ((y + height) > (gameObject.floorEnemy.x + gameObject.floorEnemy.getHeight()))))) {
+        if(this.team == Type.RED_TEAM && ((x < gameObject.floorEnemy.x) || (y < gameObject.floorEnemy.y) || ((x+width) > (gameObject.floorEnemy.x + gameObject.floorEnemy.getWidth()) || ((y + height) > (gameObject.floorEnemy.y + gameObject.floorEnemy.getHeight()))))) {
             System.out.println(x);
             System.out.println(y);
             System.out.println(width);
@@ -188,6 +200,11 @@ public class Robot extends BaseObject{
             System.out.println(gameObject.floorEnemy.getHeight());
             System.out.println(123);
             return true;
+        }
+        for(int i = 0; i < gameObject.rivers.size(); i++) {
+            if(checkCollision(gameObject.rivers.get(i), this)) {
+                return true;
+            }
         }
         return checkPoleCollision(gameObject.poles);
     }
