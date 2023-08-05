@@ -6,15 +6,15 @@ import org.kbc2d.scene.SceneType;
 import org.kbc2d.utils.ImageManager;
 import org.kbc2d.utils.SceneManager;
 
-public class ButtonGame extends BaseComponent implements ClickableComponent{
+public class ButtonGame extends BaseComponent implements ClickableComponent, HoverableComponent{
 
-    public ButtonGame(String path, float x, float y) {
+    private DoClick doClick;
+
+    public ButtonGame(String path, float x, float y, DoClick doClick) {
         super(x, y, ImageManager.getImage(path));
+        this.doClick = doClick;
     }
 
-    public ButtonGame(float x, float y) {
-        super(x, y, ImageManager.getImage("asset/btn.png"));
-    }
 
     @Override
     public void render() {
@@ -31,19 +31,22 @@ public class ButtonGame extends BaseComponent implements ClickableComponent{
 
 
     }
-//
-//    @Override
-//    public void handleClick(double x, double y) {
-//        if(this.x <= x && x <= this.x + width && this.y <= y && y <= this.y + height) {
-//            SceneManager.setCurrentScene(SceneType.GAME_SCENE);
-//        }
-//    }
 
     @Override
-    public boolean handleClick(double x, double y) {
+    public void handleClick(double x, double y) {
+        if(check(x, y)) {
+            doClick.doClick();
+        }
+    }
+
+    @Override
+    public void handleHover(double x, double y) {
+
+    }
+
+    private boolean check(double x, double y) {
         if(this.x <= x && x <= this.x + width && this.y <= y && y <= this.y + height) {
-//            SceneManager.setCurrentScene(SceneType.GAME_SCENE);
-            return true;
+            return  true;
         }
         return false;
     }

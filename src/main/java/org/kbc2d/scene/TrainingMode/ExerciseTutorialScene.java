@@ -25,14 +25,14 @@ public class ExerciseTutorialScene extends BaseScene {
 
 
     public ExerciseTutorialScene() {
-        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525);
-        backBtnC = new ButtonGame("asset/textures/ui/hexMenu/backHover.png", 10, 525);
-        backE = backBtn;
-        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
-
-        nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 995, 525);
-        nextBtnC = new ButtonGame("asset/textures/ui/hexMenu/continueHover.png", 995, 525);
-        nextE = nextBtn;
+//        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525);
+//        backBtnC = new ButtonGame("asset/textures/ui/hexMenu/backHover.png", 10, 525);
+//        backE = backBtn;
+//        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
+//
+//        nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 995, 525);
+//        nextBtnC = new ButtonGame("asset/textures/ui/hexMenu/continueHover.png", 995, 525);
+//        nextE = nextBtn;
 //        webView = new WebView();
 //        WebView webView = new WebView();
 //        webView.getEngine().loadContent("<iframe width=\"930\ height=\"523\" src=\"https://www.youtube.com/embed/MpDN0gsiY8U\" title=\"Đừng Ai Nhắc Về Anh Ấy - Trà My Idol (Lyrics Video)\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>");
@@ -61,34 +61,34 @@ public class ExerciseTutorialScene extends BaseScene {
 
     @Override
     public void handleEvent() {
-        GameVars.get("scene", Scene.class).setOnMouseClicked(
-                mouseEvent -> {
-                    if (backBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-                        SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
-                    }
-                    else if (nextBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-                        SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
-                    }
-                }
-
-
-        );
-        GameVars.get("scene", Scene.class).setOnMouseMoved(
-                mouseEvent -> {
-                    if (backE.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-                        backE = backBtnC;
-                    }
-                    else {
-                        backE = backBtn;
-                    }
-                    if (nextE.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-                        nextE = nextBtnC;
-                    }
-                    else {
-                        nextE = nextBtn;
-                    }
-
-                });
+//        GameVars.get("scene", Scene.class).setOnMouseClicked(
+//                mouseEvent -> {
+//                    if (backBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
+//                        SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
+//                    }
+//                    else if (nextBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
+//                        SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
+//                    }
+//                }
+//
+//
+//        );
+//        GameVars.get("scene", Scene.class).setOnMouseMoved(
+//                mouseEvent -> {
+//                    if (backE.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
+//                        backE = backBtnC;
+//                    }
+//                    else {
+//                        backE = backBtn;
+//                    }
+//                    if (nextE.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
+//                        nextE = nextBtnC;
+//                    }
+//                    else {
+//                        nextE = nextBtn;
+//                    }
+//
+//                });
 
     }
 }
