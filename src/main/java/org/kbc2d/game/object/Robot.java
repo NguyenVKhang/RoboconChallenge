@@ -35,23 +35,24 @@ public class Robot extends BaseObject{
         super();
         if(team == Type.BLUE_TEAM) {
             super.setImage(ImageManager.getImage("asset/robot.png"));
-            super.setPosition(0, 200);
+            super.setPosition(320, 336);
+            swivelAngle = 0;
         }
         else {
             super.setImage(ImageManager.getImage("asset/robot_3DRed.png"));
-            super.setPosition(300, 200);
+            super.setPosition(912, 336);
+            swivelAngle = -180;
         }
         this.team = team;
-        swivelAngle = 0;
         shootingAngle = 0;
         swivelAngleRotationSpeed = 50;
         shootingAngleRotationSpeed = 10;
         speed = 75;
         force = 0;
         forceChange = 10;
-        super.setWidth(50);
-        super.setHeight(50);
-        numberOfRing = 10;
+        super.setWidth(48);
+        super.setHeight(48);
+        numberOfRing = 0;
 
     }
     @Override
@@ -110,7 +111,7 @@ public class Robot extends BaseObject{
             if(Input.getInput().contains("F")) {
                 //check va chạm giữa người chơi và vòng
                 for (int i = gameObject.rings.size() - 1; i >= 0; i--) {
-                    if (gameObject.rings.get(i).getCenter().distanceTo(this.getCenter()) < 10) {
+                    if (gameObject.rings.get(i).getCenter().distanceTo(this.getCenter()) < 20) {
                         gameObject.rings.remove(i);
                         this.setNumberOfRing(this.getNumberOfRing() + 1);
                     }
@@ -247,7 +248,7 @@ public class Robot extends BaseObject{
             double vx = vxy*Math.cos(Math.toRadians(swivelAngle));
             double vy = vxy*Math.sin(Math.toRadians(swivelAngle));
             System.out.println(v);
-            Ring ring = new Ring(this.x + width/2 - Ring.widthRing/2, this.y + height/2-Ring.heightRing/2, vx, vy, vz, 10, team);
+            Ring ring = new Ring(this.x + width/2 - Ring.widthRing/2, this.y + height/2-Ring.heightRing/2, vx, vy, vz, 8, team);
             rings.add(ring);
             numberOfRing --;
         }

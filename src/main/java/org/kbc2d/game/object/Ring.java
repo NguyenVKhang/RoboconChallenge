@@ -9,8 +9,8 @@ import org.kbc2d.utils.ImageManager;
 public class Ring extends BaseObject{
     public static final double weight = 0.1;
     public static final double thickness = 1;
-    public static final double widthRing = ImageManager.getImage("asset/ring.png").getWidth();
-    public static final double heightRing = ImageManager.getImage("asset/ring.png").getHeight();
+    public static final double widthRing = 32;
+    public static final double heightRing = 32;
     private boolean isIn = false;
     private Type team;
     protected double speedX = 0;
@@ -21,8 +21,18 @@ public class Ring extends BaseObject{
     public Ring() {
         super(ImageManager.getImage("asset/ring.png"));
     }
-    public Ring(double x, double y) {
-        super(x, y, ImageManager.getImage("asset/ring.png"));
+    public Ring(double x, double y, Type team) {
+        super();
+        this.team = team;
+        if(team == Type.BLUE_TEAM) {
+            super.setImage(ImageManager.getImage("asset/ring.png"));
+        } else {
+            super.setImage(ImageManager.getImage("asset/ringEnemy.png"));
+        }
+        this.x = x;
+        this.y = y;
+        this.setWidth(widthRing);
+        this.setHeight(heightRing);
     }
     public Ring(double x, double y, double speedX, double speedY, double speedZ, double height, Type team) {
         super();
@@ -34,6 +44,8 @@ public class Ring extends BaseObject{
         }
         this.x = x;
         this.y = y;
+        this.setWidth(32);
+        this.setHeight(32);
         this.speedX = speedX;
         this.speedY = speedY;
         this.speedZ = speedZ;
@@ -52,7 +64,7 @@ public class Ring extends BaseObject{
     @Override
     public void render() {
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
-        gc.drawImage(image, x, y);
+        gc.drawImage(image, x, y, width, height);
         gc.fillText("height = " + high , this.x, this.y);
 
     }

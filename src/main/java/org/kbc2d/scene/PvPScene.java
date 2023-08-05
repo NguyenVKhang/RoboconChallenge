@@ -1,9 +1,13 @@
 package org.kbc2d.scene;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Menu;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
+import org.kbc2d.game.GameVars;
 import org.kbc2d.game.object.*;
 import org.kbc2d.game.ui.TextGame;
+import org.kbc2d.utils.ImageManager;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -24,22 +28,59 @@ public class PvPScene extends BaseScene{
     TextGame pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
     TextGame pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
 
+    Image background;
 
     float velX;
     float velY;
     float velZ;
     public PvPScene() {
-        Pole pole1 = new Pole(10, 10, 30, 30);
-        Pole pole2 = new Pole(10, 10, 330, 30);
+        // khởi tạo thành phần của game
+        //pole
+        Pole pole1 = new Pole(10, 10, 560, 280);
+        Pole pole2 = new Pole(10, 10, 480, 200);
+        Pole pole3 = new Pole(10, 10, 640 - 8/2, 360 - 8/2);
+        Pole pole4 = new Pole(10, 10, 480, 356);
+        Pole pole5 = new Pole(10, 10, 480, 512);
+        Pole pole6 = new Pole(10, 10, 792, 200);
+        Pole pole7 = new Pole(10, 10, 792, 356);
+        Pole pole8 = new Pole(10, 10, 792, 512);
+        Pole pole9 = new Pole(10, 10, 560, 432);
+        Pole pole10 = new Pole(10, 10, 712, 280);
+        Pole pole11 = new Pole(10, 10, 712, 432);
+
+        poles.add(pole3);
         poles.add(pole1);
         poles.add(pole2);
+        poles.add(pole4);
+        poles.add(pole5);
+        poles.add(pole6);
+        poles.add(pole7);
+        poles.add(pole8);
+        poles.add(pole9);
+        poles.add(pole10);
+        poles.add(pole11);
+
+        //rings
+        for(int i = 0; i < 5; i++) {
+            Ring ring1 = new Ring(320, 40, Type.BLUE_TEAM);
+            Ring ring2 = new Ring(320+640-Ring.widthRing, 40, Type.RED_TEAM);
+            Ring ring3 = new Ring(320+640-Ring.widthRing, 40+640-Ring.widthRing, Type.RED_TEAM);
+            Ring ring4 = new Ring(320, 40+640-Ring.widthRing, Type.BLUE_TEAM);
+            rings.add(ring1);
+            rings.add(ring2);
+            rings.add(ring3);
+            rings.add(ring4);
+        }
         isEndGame = false;
         timeGame = 180;
+        background = ImageManager.getImage("asset/Map.png");
     }
     @Override
     public void render() {
         floorEnemy.render();
         floor.render();
+        GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
+        gc.drawImage(ImageManager.getImage("asset/Map.png"), 320, 40, 640, 640);
         for(int i = 0; i < rings.size(); i++) {
             rings.get(i).render();
         }
