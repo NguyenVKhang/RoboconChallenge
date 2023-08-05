@@ -41,7 +41,7 @@ public class ExerciseTutorialScene extends BaseScene {
 //        webView.setLayoutY(100);
 
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
-        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 200, 290, new DoClick() {
+        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
@@ -60,7 +60,7 @@ public class ExerciseTutorialScene extends BaseScene {
         }
         );
 
-        nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 995, 525, new DoClick() {
+        nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 990, 525, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
