@@ -26,7 +26,7 @@ public class TrainingScene extends BaseScene {
 //        backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525);
 //        backGameC = new ButtonGame("asset/textures/ui/hexMenu/backHover.png", 10, 525);
 //        back = backGame;
-//        background = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
+        background = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
 //        for(int i = 0; i < LEVEL_TUTORIAL; i ++) {
 //            int h = i + 1;
 //            buttonGamesL[i] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round" + h + "Lock.png", 135 + i / 4 * 500, 50 + (i % 4) * 130);
@@ -50,10 +50,10 @@ public class TrainingScene extends BaseScene {
     @Override
     public void render() {
         background.render();
-        back.render();
-        for(int i = 0; i < LEVEL_TUTORIAL; i ++) {
-            button[i].render();
-        }
+//        back.render();
+//        for(int i = 0; i < LEVEL_TUTORIAL; i ++) {
+//            button[i].render();
+//        }
     }
 
     @Override

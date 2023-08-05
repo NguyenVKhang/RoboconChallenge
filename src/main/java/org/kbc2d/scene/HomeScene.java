@@ -1,7 +1,6 @@
 package org.kbc2d.scene;
 
-import org.kbc2d.game.ui.ButtonGame;
-import org.kbc2d.game.ui.DoClick;
+import org.kbc2d.game.ui.*;
 import org.kbc2d.utils.Input;
 import org.kbc2d.utils.SceneManager;
 
@@ -23,14 +22,14 @@ public class HomeScene extends BaseScene{
 //    ButtonGame pvp;
 //    ButtonGame settings;
 //    ButtonGame exit;
-//    BackgroundGame background;
+    BackgroundGame background;
 //    VBox vBox;
 
     ButtonGame buttonExample;
 
 
     public HomeScene() {
-//        background = new BackgroundGame("asset/textures/ui/rectMenu/mainMenuBg.png");
+        background = new BackgroundGame("asset/textures/ui/rectMenu/mainMenuBg.png");
 ////        buttonExample = new ButtonExample(100, 100);
 //        trainingModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 200, 290);
 //        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingMode.png", 200, 355);
@@ -55,14 +54,28 @@ public class HomeScene extends BaseScene{
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
             }
-        });
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                buttonExample.setImage("asset/textures/ui/rectMenu/ButtonSet/trainingModeClick.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                buttonExample.setImage("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png");
+
+            }
+
+        }
+        );
         Input.addObjHandleClick(buttonExample);
-//        Input.addObjHandleHover(buttonExample);
+        Input.addObjHandleHover(buttonExample);
+
     }
 
     @Override
     public void render() {
-//        background.render();
+        background.render();
 ////        buttonExample.render();
 //
 //
@@ -72,7 +85,6 @@ public class HomeScene extends BaseScene{
 //        pve.render();
 //        settings.render();
         buttonExample.render();
-
     }
 
     @Override

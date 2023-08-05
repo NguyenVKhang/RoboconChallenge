@@ -9,11 +9,26 @@ import org.kbc2d.utils.SceneManager;
 public class ButtonGame extends BaseComponent implements ClickableComponent, HoverableComponent{
 
     private DoClick doClick;
+    private DoHover doHover;
+    private DoNotHover doNotHover;
 
     public ButtonGame(String path, float x, float y, DoClick doClick) {
         super(x, y, ImageManager.getImage(path));
         this.doClick = doClick;
     }
+
+    public ButtonGame(String path, float x, float y, DoClick doClick, DoHover doHover, DoNotHover doNotHover) {
+        super(x, y, ImageManager.getImage(path));
+        this.doClick = doClick;
+        this.doHover = doHover;
+        this.doNotHover = doNotHover;
+    }
+
+
+    public void setImage(String path) {
+        this.image = ImageManager.getImage(path);
+    }
+
 
 
     @Override
@@ -41,7 +56,13 @@ public class ButtonGame extends BaseComponent implements ClickableComponent, Hov
 
     @Override
     public void handleHover(double x, double y) {
+        if (check(x, y)) {
+            doHover.doHover();
 
+        }
+        else {
+            doNotHover.doNotHover();
+        }
     }
 
     private boolean check(double x, double y) {
@@ -50,4 +71,12 @@ public class ButtonGame extends BaseComponent implements ClickableComponent, Hov
         }
         return false;
     }
+//
+//    @Override
+//    public void handleNotHover() {
+//        if (check(x, y)) {
+//            doNotHover.doNotHover();
+//        }
+//
+//    }
 }
