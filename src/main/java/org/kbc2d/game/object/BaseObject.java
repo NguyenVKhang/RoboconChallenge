@@ -69,6 +69,26 @@ public abstract class BaseObject
         this.y = y;
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
     public void setHeight(double height) {
         this.height = height;
     }

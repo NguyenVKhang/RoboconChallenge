@@ -17,6 +17,7 @@ public class PvPScene extends BaseScene {
         gameScene.update(deltaTime);
     }
 
+
     @Override
     public void handleEvent() {
         gameScene.handleEvent();
