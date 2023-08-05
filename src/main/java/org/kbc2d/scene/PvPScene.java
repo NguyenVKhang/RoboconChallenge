@@ -62,9 +62,7 @@ public class PvPScene extends BaseScene{
 
         ///
 
-
-
-
+        
 
         // khởi tạo thành phần của game
         centerFloor = new CenterFloor();
@@ -222,7 +220,9 @@ public class PvPScene extends BaseScene{
             System.out.println(teamWin + "chiến thắng với điểm số: " + Integer.toString(PointTeam1) + " " + Integer.toString(PointTeam2));
         }
 
-
+        for(Ring ring : rings) {
+            ring.update(poles);
+        }
 
 
     }
