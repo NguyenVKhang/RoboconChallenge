@@ -40,6 +40,8 @@ public class Ring extends BaseObject{
         this.high = height;
     }
 
+
+
     public void setIn(boolean in) {
         isIn = in;
     }
@@ -80,6 +82,10 @@ public class Ring extends BaseObject{
         speedZ = 10;
     }
 
+    public Type getTeam() {
+        return team;
+    }
+
     @Override
     public void handleEvent() {
 
@@ -101,4 +107,6 @@ public class Ring extends BaseObject{
     public double getHigh() {
         return high;
     }
+
 }
+

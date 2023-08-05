@@ -27,6 +27,10 @@ public class Floor extends BaseObject{
         gc.drawImage(image, x, y, width, height);
     }
 
+    public void setTeam(Type team) {
+        this.team = team;
+    }
+
     @Override
     public void update(double deltaTime) {
 
