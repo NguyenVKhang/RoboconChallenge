@@ -24,6 +24,11 @@ public class TextGame extends BaseComponent {
     }
 
 
+    public void setText_(String text) {
+        this.text = text;
+    }
+
+
     @Override
     public void render() {
         GameVars.get("gc", GraphicsContext.class).setFont(font);
