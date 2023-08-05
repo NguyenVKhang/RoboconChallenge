@@ -7,7 +7,7 @@ import org.kbc2d.game.object.Type;
 public class PvEScene extends BaseScene{
 
     Robot robot = new Robot(Type.BLUE_TEAM);
-    Ring ring = new Ring(600, 200);
+//    Ring ring = new Ring(600, 200);
 
     float velX;
     float velY;
@@ -16,7 +16,7 @@ public class PvEScene extends BaseScene{
     @Override
     public void render() {
         robot.render();
-        ring.render();
+//        ring.render();
     }
 
     @Override

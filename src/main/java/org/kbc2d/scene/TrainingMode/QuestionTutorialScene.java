@@ -1,9 +1,7 @@
 package org.kbc2d.scene.TrainingMode;
 
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
-import org.kbc2d.game.GameVars;
+import javafx.scene.text.FontWeight;
 import org.kbc2d.game.ui.*;
 import org.kbc2d.scene.BaseScene;
 import org.kbc2d.scene.SceneType;
@@ -69,7 +67,7 @@ public class QuestionTutorialScene extends BaseScene {
 
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
 //
-        backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525, new DoClick() {
+        backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 600, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.EXERCISE_TUTORIAL_SCENE);

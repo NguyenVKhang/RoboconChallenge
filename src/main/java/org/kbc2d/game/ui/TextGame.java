@@ -3,6 +3,7 @@ package org.kbc2d.game.ui;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import org.kbc2d.game.GameVars;
 import org.kbc2d.utils.ImageManager;
@@ -10,6 +11,7 @@ import org.kbc2d.utils.ImageManager;
 public class TextGame extends BaseComponent {
     String text;
     Font font;
+    FontWeight fontWeight;
 //    Text text_;
 
     public TextGame(String text, int x, int y) {
@@ -22,7 +24,6 @@ public class TextGame extends BaseComponent {
 //        text_.setFont(font);
         System.out.println("font: " + font);
         this.font = font;
-
     }
     public void setColor(Color color) {
 //        text_.setFill(color);
