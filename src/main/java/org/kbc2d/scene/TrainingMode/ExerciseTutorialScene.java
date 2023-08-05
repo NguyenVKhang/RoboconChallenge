@@ -2,19 +2,19 @@ package org.kbc2d.scene.TrainingMode;
 
 import javafx.scene.Scene;
 import org.kbc2d.game.GameVars;
-import org.kbc2d.game.ui.BackgroundGame;
-import org.kbc2d.game.ui.ButtonGame;
+import org.kbc2d.game.ui.*;
 import org.kbc2d.scene.BaseScene;
 import org.kbc2d.scene.SceneType;
+import org.kbc2d.utils.Input;
 import org.kbc2d.utils.SceneManager;
 //import javafx.scene.web.WebView;
 
 public class ExerciseTutorialScene extends BaseScene {
     ButtonGame backBtn;
-    ButtonGame backBtnC;
-    ButtonGame backE;
+//    ButtonGame backBtnC;
+//    ButtonGame backE;
     ButtonGame nextBtn;
-    ButtonGame nextBtnC;
+//    ButtonGame nextBtnC;
     ButtonGame nextE;
 //    WebView webView;
 
@@ -40,6 +40,31 @@ public class ExerciseTutorialScene extends BaseScene {
 //        webView.setLayoutX(100);
 //        webView.setLayoutY(100);
 
+        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
+        backBtn = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/back.png", 200, 290, new DoClick() {
+            @Override
+            public void doClick() {
+                SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                backBtn.setImage("asset/textures/ui/hexMenu/back.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                backBtn.setImage("asset/textures/ui/hexMenu/backHover.png");
+
+            }
+
+        }
+        );
+
+
+        Input.addObjHandleClick(backBtn);
+        Input.addObjHandleHover(backBtn);
+
 
     }
 
@@ -47,8 +72,8 @@ public class ExerciseTutorialScene extends BaseScene {
     @Override
     public void render() {
         backgroundGame.render();
-        backE.render();
-        nextE.render();
+        backBtn.render();
+//        nextE.render();
 
 //        GameVars.get("gc", javafx.scene.canvas.GraphicsContext.class).drawImage(webView.snapshot(null, null), 100, 100);
 
