@@ -141,6 +141,7 @@ public class GameScene extends BaseScene{
         robot.update(rings, deltaTime);
         for(int i = 0 ; i < rings.size(); i++) {
             rings.get(i).update(deltaTime);
+            rings.get(i).update(poles);
         }
 
         //check va chạm giữa vòng và cột
