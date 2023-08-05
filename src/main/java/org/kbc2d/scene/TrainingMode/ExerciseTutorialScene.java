@@ -15,7 +15,7 @@ public class ExerciseTutorialScene extends BaseScene {
 //    ButtonGame backE;
     ButtonGame nextBtn;
 //    ButtonGame nextBtnC;
-    ButtonGame nextE;
+//    ButtonGame nextE;
 //    WebView webView;
 
     BackgroundGame backgroundGame;
@@ -41,7 +41,7 @@ public class ExerciseTutorialScene extends BaseScene {
 //        webView.setLayoutY(100);
 
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
-        backBtn = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/back.png", 200, 290, new DoClick() {
+        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 200, 290, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
@@ -49,13 +49,31 @@ public class ExerciseTutorialScene extends BaseScene {
         }, new DoHover() {
             @Override
             public void doHover() {
-                backBtn.setImage("asset/textures/ui/hexMenu/back.png");
+                backBtn.setImage("asset/textures/ui/hexMenu/backHover.png");
             }
         }, new DoNotHover() {
             @Override
             public void doNotHover() {
-                backBtn.setImage("asset/textures/ui/hexMenu/backHover.png");
+                backBtn.setImage("asset/textures/ui/hexMenu/back.png");
+            }
 
+        }
+        );
+
+        nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 995, 525, new DoClick() {
+            @Override
+            public void doClick() {
+                SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                nextBtn.setImage("asset/textures/ui/hexMenu/continueHover.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                nextBtn.setImage("asset/textures/ui/hexMenu/continue.png");
             }
 
         }
@@ -65,6 +83,10 @@ public class ExerciseTutorialScene extends BaseScene {
         Input.addObjHandleClick(backBtn);
         Input.addObjHandleHover(backBtn);
 
+        Input.addObjHandleClick(nextBtn);
+        Input.addObjHandleHover(nextBtn);
+
+
 
     }
 
@@ -73,6 +95,7 @@ public class ExerciseTutorialScene extends BaseScene {
     public void render() {
         backgroundGame.render();
         backBtn.render();
+        nextBtn.render();
 //        nextE.render();
 
 //        GameVars.get("gc", javafx.scene.canvas.GraphicsContext.class).drawImage(webView.snapshot(null, null), 100, 100);

@@ -60,23 +60,28 @@ public class TrainingScene extends BaseScene {
                 @Override
                 public void doHover() {
                     if (finalI < UNLOCK_LEVEL){
-                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + ".png");}
+                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + "C.png");}
                     else {
-                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + "Lock.png");}
+                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + "LockC.png");}
                 }
             }, new DoNotHover() {
                 @Override
                 public void doNotHover() {
                     if (finalI < UNLOCK_LEVEL){
-                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + "C.png");}
+                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + ".png");}
                     else {
-                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + "LockC.png");
+                        button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + "Lock.png");
                     }
 
                 }
 
             }
+
+
             );
+            if (finalI < UNLOCK_LEVEL) {
+                button[finalI].setImage("asset/textures/ui/rectMenu/levelButton/round" + h + ".png");
+            }
         };
 
         backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525, new DoClick() {
