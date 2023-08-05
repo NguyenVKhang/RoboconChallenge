@@ -23,32 +23,13 @@ public class TrainingScene extends BaseScene {
     BackgroundGame background;
 
     public TrainingScene() {
-//        backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525);
-//        backGameC = new ButtonGame("asset/textures/ui/hexMenu/backHover.png", 10, 525);
-//        back = backGame;
+
         background = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
-//        for(int i = 0; i < LEVEL_TUTORIAL; i ++) {
-//            int h = i + 1;
-//            buttonGamesL[i] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round" + h + "Lock.png", 135 + i / 4 * 500, 50 + (i % 4) * 130);
-//            buttonGamesLC[i] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round" + h + "LockC.png", 135 + i / 4 * 500, 50 + (i % 4) * 130);
-//            button[i] = buttonGamesL[i];
-//        }
-//        buttonGames[0] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round1.png", 135, 50);
-//        buttonGames[1] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round2.png", 135, 50 + 130);
-//        buttonGamesC[0] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round1C.png", 135, 50);
-//        buttonGamesC[1] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round2C.png", 135, 50);
-//
-//        for(int i = 0; i < UNLOCK_LEVEL; i++) {
-//            button[i] = buttonGames[i];
-//        }
-//        for (int i = 4; i < LEVEL_TUTORIAL; i++) {
-//            buttonGames[i].setX(500);
-//        }
 
         for (int i = 0; i < LEVEL_TUTORIAL; i++) {
             int h = i + 1;
             int finalI = i;
-            button[i] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round" + h + "Lock.png", 135 + i / 4 * 500, 50 + (i % 4) * 130, new DoClick() {
+            button[i] = new ButtonGame("asset/textures/ui/rectMenu/levelButton/round" + h + "Lock.png", 250 + i / 4 * 500, 100 + (i % 4) * 150, new DoClick() {
                 @Override
 
                 public void doClick() {
@@ -84,7 +65,7 @@ public class TrainingScene extends BaseScene {
             }
         };
 
-        backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525, new DoClick() {
+        backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 600, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.HOME_SCENE);
