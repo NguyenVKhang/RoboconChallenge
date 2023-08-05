@@ -1,20 +1,20 @@
 package org.kbc2d.scene;
 
-import org.kbc2d.game.object.Pole;
-import org.kbc2d.game.object.Ring;
-import org.kbc2d.game.object.Robot;
-import org.kbc2d.game.object.Type;
+import javafx.scene.control.Menu;
+import org.kbc2d.game.object.*;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 
 public class PvPScene extends BaseScene{
-    List<Ring> rings = new ArrayList<>();
-    List<Pole> poles = new ArrayList<>();
-    Robot enemy = new Robot(Type.RED_TEAM);
+    public List<Ring> rings = new ArrayList<>();
+    public List<Pole> poles = new ArrayList<>();
+    public Robot enemy = new Robot(Type.RED_TEAM);
 
-    Robot robot = new Robot(Type.BLUE_TEAM);
+    public Robot robot = new Robot(Type.BLUE_TEAM);
+    public Floor floor = new Floor(Type.BLUE_TEAM);
+    public Floor floorEnemy = new Floor(Type.RED_TEAM);
 
     float velX;
     float velY;
@@ -26,7 +26,8 @@ public class PvPScene extends BaseScene{
     }
     @Override
     public void render() {
-
+        floorEnemy.render();
+        floor.render();
         for(int i = 0; i < rings.size(); i++) {
             rings.get(i).render();
         }
@@ -39,8 +40,11 @@ public class PvPScene extends BaseScene{
 
     @Override
     public void update(float deltaTime) {
-        enemy.update(deltaTime, rings, poles);
-        robot.update(deltaTime, rings, poles);
+        floor.render();
+        floorEnemy.render();
+        enemy.update(deltaTime, this);
+        enemy.update(rings, deltaTime);
+        robot.update(deltaTime, this);
         robot.update(rings, deltaTime);
         for(int i = 0 ; i < rings.size(); i++) {
             rings.get(i).update(deltaTime);
@@ -79,7 +83,7 @@ public class PvPScene extends BaseScene{
         }
 
         //vòng trúng vào cột và tiếp tục đập vào cột
-        if(ring.getIn() && distance + 1> ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
+        if(ring.getIn() && distance + 2> ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
             Vector2D difference = ring.getSpeed().subtract(projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
             Vector2D scaled = difference.multiply(2);
             ring.setSpeed(ring.getSpeed().subtract(scaled));

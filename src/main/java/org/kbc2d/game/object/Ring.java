@@ -24,8 +24,16 @@ public class Ring extends BaseObject{
     public Ring(double x, double y) {
         super(x, y, ImageManager.getImage("asset/ring.png"));
     }
-    public Ring(double x, double y, double speedX, double speedY, double speedZ, double height) {
-        super(x, y, ImageManager.getImage("asset/ring.png"));
+    public Ring(double x, double y, double speedX, double speedY, double speedZ, double height, Type team) {
+        super();
+        this.team = team;
+        if(team == Type.BLUE_TEAM) {
+            super.setImage(ImageManager.getImage("asset/ring.png"));
+        } else {
+            super.setImage(ImageManager.getImage("asset/ringEnemy.png"));
+        }
+        this.x = x;
+        this.y = y;
         this.speedX = speedX;
         this.speedY = speedY;
         this.speedZ = speedZ;
