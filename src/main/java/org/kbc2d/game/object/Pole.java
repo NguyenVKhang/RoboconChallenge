@@ -8,10 +8,10 @@ import org.kbc2d.utils.ImageManager;
 public class Pole extends BaseObject {
     private double heightPole;
     private double point;
-    private Type team;
+    private Type team = Type.NO_TEAM;
 
-    public Pole(double heightPole, double point) {
-        super(200, 200, ImageManager.getImage("asset/pole.png"));
+    public Pole(double heightPole, double point, double x, double y) {
+        super(x, y, ImageManager.getImage("asset/pole.png"));
         this.heightPole = heightPole;
         this.point = point;
     }
@@ -22,7 +22,9 @@ public class Pole extends BaseObject {
         gc.fillText("height = " + heightPole , this.x, this.y);
     }
 
-
+    public void setTeam(Type team) {
+        this.team = team;
+    }
 
     @Override
     public void update(double deltaTime) {
@@ -39,5 +41,13 @@ public class Pole extends BaseObject {
 
     public double getHeightPole() {
         return heightPole;
+    }
+
+    public Type getTeam() {
+        return team;
+    }
+
+    public double getPoint() {
+        return point;
     }
 }
