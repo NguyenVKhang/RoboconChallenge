@@ -2,9 +2,13 @@ package org.kbc2d.game.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import org.kbc2d.game.GameVars;
+import org.kbc2d.utils.Input;
 
 public class FormGame extends BaseComponent implements ClickableComponent, HoverableComponent {
 
@@ -15,6 +19,7 @@ public class FormGame extends BaseComponent implements ClickableComponent, Hover
     Rectangle rectangle;
     String textInRectangle;
     int textSize;
+    private boolean dropShadow = false;
 
     public FormGame(int x, int y, int width, int height){
         rectangle = new Rectangle(x, y, width, height);
@@ -36,7 +41,7 @@ public class FormGame extends BaseComponent implements ClickableComponent, Hover
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(5);
-        textSize = height / 2;
+        textSize = height/ 2;
 
 
         textInRectangle = "";
@@ -66,25 +71,32 @@ public class FormGame extends BaseComponent implements ClickableComponent, Hover
         GameVars.get("gc", GraphicsContext.class).setLineWidth(rectangle.getStrokeWidth());
 
 
-        DropShadow borderGlow = new DropShadow();
-        borderGlow.setColor(Color.YELLOW);
-        borderGlow.setWidth(20);
-        borderGlow.setHeight(20);
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.YELLOW);
+        dropShadow.setWidth(20);
+        dropShadow.setHeight(20);
 
-        GameVars.get("gc", GraphicsContext.class).setEffect(borderGlow);
+        if (this.dropShadow == true) {
+            GameVars.get("gc", GraphicsContext.class).setEffect(dropShadow);
+        }
+
         GameVars.get("gc", GraphicsContext.class).strokeRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+
+
+        // set size text
         GameVars.get("gc", GraphicsContext.class).restore();
 
 
+        GameVars.get("gc", GraphicsContext.class).setFont(Font.font("Arial", FontWeight.BOLD, textSize));
 
+        GameVars.get("gc", GraphicsContext.class).fillText(textInRectangle, rectangle.getX() + 15, rectangle.getY() + 3 * textSize/2);
 
-
-
-        GameVars.get("gc", GraphicsContext.class).fillText(textInRectangle, rectangle.getX(), rectangle.getY() + textSize);
     }
 
     @Override
     public void update() {
+
+
 
     }
 
@@ -111,12 +123,34 @@ public class FormGame extends BaseComponent implements ClickableComponent, Hover
             doNotHover.doNotHover();
         }
     }
-
+public void setDropShadow(boolean dropShadow) {
+        this.dropShadow = dropShadow;
+    }
+    public boolean getDropShadow() {
+        return this.dropShadow;
+    }
     private boolean check(double x, double y) {
         if(this.x <= x && x <= this.x + width && this.y <= y && y <= this.y + height) {
             return  true;
         }
         return false;
+    }
+
+    public void addCharacter(char c) {
+        textInRectangle += c;
+    }
+    public String getTextInRectangle() {
+        return  textInRectangle;
+    }
+
+    public void setTextInRectangle(String textInRectangle) {
+        this.textInRectangle = textInRectangle;
+    }
+
+    public void removeCharacter() {
+        if(textInRectangle.length() > 0) {
+            textInRectangle = textInRectangle.substring(0, textInRectangle.length() - 1);
+        }
     }
 }
 

@@ -32,8 +32,12 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-        SceneManager.setCurrentScene(SceneType.HOME_SCENE);
 
+<<<<<<< HEAD
+=======
+        SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
+
+>>>>>>> 30f1cc0e0d4bf29c5726235624d46b8e365792e9
         GameLoop.start();
     }
 
