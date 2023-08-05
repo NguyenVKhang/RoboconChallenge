@@ -5,51 +5,20 @@ import org.kbc2d.utils.Input;
 import org.kbc2d.utils.SceneManager;
 
 public class HomeScene extends BaseScene{
-//    ButtonExample buttonExample;
-//    ButtonGame trainingModeButton;
-//    ButtonGame pvpModeButton;
-//    ButtonGame exitButton;
-//    ButtonGame pveModeButton;
-//    ButtonGame settingsButton;
-//    ButtonGame trainingModeButtonC;
-//    ButtonGame pvpModeButtonC;
-//    ButtonGame exitButtonC;
-//    ButtonGame pveModeButtonC;
-//    ButtonGame settingsButtonC;
-//
-//    ButtonGame train;
+
     ButtonGame pveModeButton;
     ButtonGame pvpModeButton;
     ButtonGame settingsButton;
     ButtonGame exitButton;
     BackgroundGame background;
-//    VBox vBox;
 
     ButtonGame trainingButton;
 
 
     public HomeScene() {
         background = new BackgroundGame("asset/textures/ui/rectMenu/mainMenuBg.png");
-////        buttonExample = new ButtonExample(100, 100);
-//        trainingModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 200, 290);
-//        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingMode.png", 200, 355);
-//        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfMode.png", 200, 420);
-//        exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 600, 290);
-//        settingsButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Settings.png", 600, 355);
 
-//        trainingModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingModeClick.png", 200, 290);
-//        pvpModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 200, 355);
-//        pveModeButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 200, 420);
-//        exitButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/ExitClick.png", 600, 290);
-//        settingsButtonC = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/SettingsClick.png", 600, 355);
-//
-//
-//        train = trainingModeButton;
-//        pvp = pvpModeButton;
-//        pve = pveModeButton;
-//        settings = settingsButton;
-//        exit = exitButton;
-        exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 600, 290, new DoClick() {
+        exitButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Exit.png", 800, 350, new DoClick() {
             @Override
             public void doClick() {
 
@@ -68,7 +37,7 @@ public class HomeScene extends BaseScene{
 
         }
         );
-        settingsButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Settings.png", 600, 355, new DoClick() {
+        settingsButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Settings.png", 800, 450, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.SETTING_SCENE);
@@ -87,7 +56,7 @@ public class HomeScene extends BaseScene{
 
         }
         );
-        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 200, 420, new DoClick() {
+        pveModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/selfModeClick.png", 270, 550, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.PvE_SCENE);
@@ -106,7 +75,7 @@ public class HomeScene extends BaseScene{
 
         }
         );
-        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 200, 355, new DoClick() {
+        pvpModeButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/fightingModeClick.png", 270, 450, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.PvP_SCENE);
@@ -125,7 +94,7 @@ public class HomeScene extends BaseScene{
 
         }
         );
-        trainingButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 200, 290, new DoClick() {
+        trainingButton = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/trainingMode.png", 270, 350, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);

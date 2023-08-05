@@ -29,7 +29,9 @@ public class ExerciseTutorialScene extends BaseScene {
 
 
 
+
     public ExerciseTutorialScene() {
+
 //        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525);
 //        backBtnC = new ButtonGame("asset/textures/ui/hexMenu/backHover.png", 10, 525);
 //        backE = backBtn;
@@ -44,13 +46,15 @@ public class ExerciseTutorialScene extends BaseScene {
 //        webView.setPrefSize(930, 523);
 //        webView.setLayoutX(100);
 //        webView.setLayoutY(100);
-        textGame = new TextGame("Hãy xem video hướng dẫn sau và làm bài tập ở trang bên nhé.",200,100);
-        textGame.setFont_(new Font("Monospaced", 30));
+        textGame = new TextGame("Hãy xem video hướng dẫn sau và làm bài tập ở trang bên nhé.",250,100);
+
+        textGame.setFont_(new Font("Monospaced",30));
         textGame.setColor(Color.WHITE);
 
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
-        videoGame = new VideoGame("asset/video/Videoooo.mp4", 350, 100);
-        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525, new DoClick() {
+        videoGame = new VideoGame("src/main/resources/org/kbc2d/asset/video/123.mp4", 300, 150);
+        videoGame.setPlay();
+        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 600, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
@@ -69,7 +73,7 @@ public class ExerciseTutorialScene extends BaseScene {
         }
         );
 
-        nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 990, 525, new DoClick() {
+        nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 1130, 600, new DoClick() {
             @Override
             public void doClick() {
                 SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
@@ -96,7 +100,6 @@ public class ExerciseTutorialScene extends BaseScene {
 
         Input.addObjHandleClick(nextBtn);
         Input.addObjHandleHover(nextBtn);
-
 
 
     }
