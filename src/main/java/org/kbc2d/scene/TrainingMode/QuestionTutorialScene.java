@@ -19,7 +19,7 @@ public class QuestionTutorialScene extends BaseScene {
     public static final int STATUS_IMAGE = 3;
     BackgroundGame backgroundGame;
     ButtonGame backGame;
-    TextFieldGame textInput;
+ //   TextFieldGame textInput;
     ButtonGame checkAnswer;
 //    TextGame textGame;
     TextGame textQuestionAnswer;
@@ -40,9 +40,33 @@ public class QuestionTutorialScene extends BaseScene {
 
 //    TextFieldGame textFieldGame;
 
+    FormGame formGame;
+
 
     public QuestionTutorialScene() {
-        textInput = new TextFieldGame(700, 700, 100, 50);
+     //   textInput = new TextFieldGame(700, 700, 100, 50);
+        formGame = new FormGame(500, 500, 200, 50, new DoClick() {
+            @Override
+            public void doClick() {
+                System.out.println("click");
+            }
+        }, new DoNotClick() {
+            @Override
+            public void doNotClick() {
+                System.out.println("not click");
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+//                System.out.println("hover");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+//                System.out.println("not hover");
+            }
+        });
+
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
 //
         backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 525, new DoClick() {
@@ -65,16 +89,8 @@ public class QuestionTutorialScene extends BaseScene {
         });
 
 
-//        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 400);
-//        for (int i = 0; i < IMAGE_HIDDEN; i++) {
-//            buttonGamess[i][0] = new ButtonGame("asset/textures/training/false_question_image.png", 700 + i / 3 * 105, 150 + (i % 3) * 105);
-//            buttonGamess[i][1] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i / 3 * 105, 150 + (i % 3) * 105);
-//            buttonGamess[i][2] = new ButtonGame("asset/textures/training/true_question_image.png", 700 + i / 3 * 105, 150 + (i % 3) * 105);
-//
-//            buttonGames[i] = buttonGamess[i][1];
-//            statusImages[i] = 1;
-//        }
-//
+
+
         ReadFileQuestionAnswering readFileQuestionAnswering = new ReadFileQuestionAnswering("src/main/resources/org/kbc2d/asset/data/level1_question.txt");
         questionAnswer = readFileQuestionAnswering.formatQuestionAnswering();
 //
@@ -116,6 +132,17 @@ public class QuestionTutorialScene extends BaseScene {
         checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 400, new DoClick() {
             @Override
             public void doClick() {
+                // random 0 and 1
+                int random = (int) (Math.random() * 2);
+                if (random == 1) {
+                    buttonGames[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/img-" + Integer.toString(indexQuestionAnswer + 1) + ".png");
+                    statusImages[indexQuestionAnswer] = 2;
+                    indexQuestionAnswer = 10;
+                } else {
+                    buttonGames[indexQuestionAnswer].setImage("asset/textures/training/false_question_image.png");
+                    statusImages[indexQuestionAnswer] = 0;
+                    indexQuestionAnswer = 10;
+                }
 
             }
         }, new DoHover() {
@@ -142,20 +169,26 @@ public class QuestionTutorialScene extends BaseScene {
         Input.addObjHandleClick(checkAnswer);
         Input.addObjHandleHover(checkAnswer);
 
+        Input.addObjHandleClick(formGame);
+        Input.addObjHandleHover(formGame);
+
     }
 
 
     @Override
     public void render() {
         backgroundGame.render();
+
         backGame.render();
         for (int i = 0; i < IMAGE_HIDDEN; i++) {
             buttonGames[i].render();
         }
         if (indexQuestionAnswer != 10) {
+      //      textInput.render();
+            formGame.render();
             checkAnswer.render();
         }
-        textInput.render();
+
 //
 //
 //        for (int i = 0; i < IMAGE_HIDDEN; i++) {
@@ -178,30 +211,6 @@ public class QuestionTutorialScene extends BaseScene {
 
     @Override
     public void handleEvent() {
-//        GameVars.get("scene", Scene.class).setOnMouseClicked(
-//                mouseEvent -> {
-//                    for (int i = 0; i < IMAGE_HIDDEN; i++) {
-//                        if (buttonGames[i].handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-//                            if (statusImages[i] == 1) {
-//                                textQuestionAnswer = new TextGame(questionAnswer.get(i).get(0) + "\n" + questionAnswer.get(i).get(1) + "\n" + questionAnswer.get(i).get(2) + "\n" + questionAnswer.get(i).get(3) + "\n" + questionAnswer.get(i).get(4) + "\n" + questionAnswer.get(i).get(5), 100, 200);
-//                                indexQuestionAnswer = i;
-//                            }
-//                        }
-//                    }
-//                    if (backGame.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-//                        SceneManager.setCurrentScene(SceneType.EXERCISE_TUTORIAL_SCENE);
-//                    }
-//
-//                    if (checkAnswer.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())){
-//                        if (false) {
-//                            statusImages[indexQuestionAnswer] = 2;
-//                            buttonGames[indexQuestionAnswer] = buttonGamess[indexQuestionAnswer][2];
-//                        } else {
-//                            statusImages[indexQuestionAnswer] = 0;
-//                            buttonGames[indexQuestionAnswer] = buttonGamess[indexQuestionAnswer][0];
-//                        }
-//                    }
-//                }
-//        );
+
     }
 }

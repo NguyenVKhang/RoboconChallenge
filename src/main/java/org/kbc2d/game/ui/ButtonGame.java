@@ -19,6 +19,7 @@ public class ButtonGame extends BaseComponent implements ClickableComponent, Hov
 
     public ButtonGame(String path, float x, float y, DoClick doClick, DoHover doHover, DoNotHover doNotHover) {
         super(x, y, ImageManager.getImage(path));
+
         this.doClick = doClick;
         this.doHover = doHover;
         this.doNotHover = doNotHover;
