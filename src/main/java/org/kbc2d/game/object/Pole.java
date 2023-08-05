@@ -12,13 +12,15 @@ public class Pole extends BaseObject {
 
     public Pole(double heightPole, double point, double x, double y) {
         super(x, y, ImageManager.getImage("asset/pole.png"));
+        this.setWidth(8);
+        this.setHeight(8);
         this.heightPole = heightPole;
         this.point = point;
     }
     @Override
     public void render() {
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
-        gc.drawImage(image, x, y);
+        gc.drawImage(image, x, y, width, height);
         gc.fillText("height = " + heightPole , this.x, this.y);
     }
 

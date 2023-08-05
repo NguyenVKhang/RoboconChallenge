@@ -11,14 +11,14 @@ public class Floor extends BaseObject{
         super();
         if(team == Type.BLUE_TEAM) {
             super.setImage(ImageManager.getImage("asset/floor.png"));
-            super.setPosition(0, 0);
+            super.setPosition(320, 40);
         }
         else {
             super.setImage(ImageManager.getImage("asset/floorEnemy.png"));
-            super.setPosition(300, 0);
+            super.setPosition(640, 40);
         }
-        super.setWidth(300);
-        super.setHeight(600);
+        super.setWidth(320);
+        super.setHeight(640);
     }
 
     @Override
