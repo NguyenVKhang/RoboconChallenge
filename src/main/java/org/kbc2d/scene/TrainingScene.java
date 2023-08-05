@@ -1,12 +1,10 @@
 package org.kbc2d.scene;
 
-import javafx.scene.Scene;
-import org.kbc2d.game.GameVars;
 import org.kbc2d.game.ui.*;
 import org.kbc2d.utils.Input;
 import org.kbc2d.utils.SceneManager;
 
-import static org.kbc2d.game.ui.GameStatic.UNLOCK_LEVEL;
+import static org.kbc2d.game.GameStatic.UNLOCK_LEVEL;
 
 public class TrainingScene extends BaseScene {
     public static final int LEVEL_TUTORIAL = 8;

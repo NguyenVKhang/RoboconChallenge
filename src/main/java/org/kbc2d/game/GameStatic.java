@@ -1,4 +1,4 @@
-package org.kbc2d.game.ui;
+package org.kbc2d.game;
 
 public class GameStatic {
     public static int LEVEL = 1;

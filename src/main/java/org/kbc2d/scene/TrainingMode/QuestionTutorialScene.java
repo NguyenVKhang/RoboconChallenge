@@ -12,9 +12,11 @@ import org.kbc2d.utils.SceneManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.kbc2d.constant.GlobalConstant.QWERTY;
+
 public class QuestionTutorialScene extends BaseScene {
     public static final int IMAGE_HIDDEN = 9;
-    public static final int STATUS_IMAGE = 3;
+//    public static final int STATUS_IMAGE = 3;
     BackgroundGame backgroundGame;
     ButtonGame backGame;
  //   TextFieldGame textInput;
@@ -46,12 +48,12 @@ public class QuestionTutorialScene extends BaseScene {
         formGame = new FormGame(500, 500, 200, 50, new DoClick() {
             @Override
             public void doClick() {
-                System.out.println("click");
+                formGame.setDropShadow(true);
             }
         }, new DoNotClick() {
             @Override
             public void doNotClick() {
-                System.out.println("not click");
+                formGame.setDropShadow(false);
             }
         }, new DoHover() {
             @Override
@@ -130,17 +132,16 @@ public class QuestionTutorialScene extends BaseScene {
         checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 400, new DoClick() {
             @Override
             public void doClick() {
-                // random 0 and 1
-                int random = (int) (Math.random() * 2);
-                if (random == 1) {
+                if (formGame.getTextInRectangle().equals(questionAnswer.get(indexQuestionAnswer).get(6))) {
                     buttonGames[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/img-" + Integer.toString(indexQuestionAnswer + 1) + ".png");
                     statusImages[indexQuestionAnswer] = 2;
-                    indexQuestionAnswer = 10;
                 } else {
                     buttonGames[indexQuestionAnswer].setImage("asset/textures/training/false_question_image.png");
                     statusImages[indexQuestionAnswer] = 0;
-                    indexQuestionAnswer = 10;
                 }
+                indexQuestionAnswer = 10;
+                formGame.setTextInRectangle("");
+
 
             }
         }, new DoHover() {
@@ -204,6 +205,20 @@ public class QuestionTutorialScene extends BaseScene {
 
     @Override
     public void update(float deltaTime) {
+        if(formGame.getDropShadow()) {
+            for (int i = 0; i < QWERTY.length(); i++) {
+                if (Input.getInput().contains(Character.toString(QWERTY.charAt(i)))) {
+                    formGame.addCharacter(QWERTY.charAt(i));
+                    Input.getInput().remove(Character.toString(QWERTY.charAt(i)));
+                }
+            }
+            // check if backspace is pressed (to delete)
+            if (Input.getInput().contains("BACK_SPACE")) {
+                formGame.removeCharacter();
+                Input.getInput().remove("BACK_SPACE");
+
+            }
+        }
 
     }
 
