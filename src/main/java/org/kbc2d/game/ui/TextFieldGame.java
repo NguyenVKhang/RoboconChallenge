@@ -20,6 +20,7 @@ public class TextFieldGame extends BaseComponent {
         //GameVars.get("gc", GraphicsContext.class).drawImage(image, x, y);
         // render fieldtext in gamevars
         GameVars.get("gc", GraphicsContext.class).fillText(textField.getText(), textField.getLayoutX(), textField.getLayoutY());
+
     }
     public void update(){
 
