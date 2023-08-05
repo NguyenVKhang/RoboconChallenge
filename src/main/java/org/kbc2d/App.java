@@ -31,7 +31,7 @@ public class App extends Application {
         Input.attachEventHandle(scene);
         stage.setScene(scene);
         stage.show();
-        SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
+        SceneManager.setCurrentScene(SceneType.EXERCISE_TUTORIAL_SCENE);
         GameLoop.start();
     }
 
