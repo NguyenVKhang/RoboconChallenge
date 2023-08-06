@@ -13,6 +13,7 @@ public class Robot extends BaseObject{
     private int numberOfRing;
     //    private static double height = 10;
     protected double swivelAngle;
+    private double forceMax = 10;
 
     private Type team;
     protected double shootingAngle;
@@ -24,6 +25,7 @@ public class Robot extends BaseObject{
     protected double force;
 
     protected double forceChange;
+    double isShoot = 0;
 
     public Robot(Type team) {
         super();
@@ -123,6 +125,14 @@ public class Robot extends BaseObject{
                     }
                 }
             }
+            if(Input.getInput().contains("Z")) {
+                force += forceChange * deltaTime;
+                if(force > forceMax)  force = forceMax;
+            }
+            if(Input.getInput().contains("X")) {
+                force -= forceChange * deltaTime;
+                if(force < 0) force = 0;
+            }
         }
         else {
             if(Input.getInput().contains("UP")) {
@@ -182,7 +192,7 @@ public class Robot extends BaseObject{
     }
 
     public boolean checkCollisionGameObject(GameScene gameObject)  {
-        if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.x + gameObject.floor.getHeight())))) {
+        if(this.team == Type.BLUE_TEAM && ((x < gameObject.floor.x) || (y < gameObject.floor.y) || ((x+width) > (gameObject.floor.x + gameObject.floor.getWidth())) || ((y + height) > (gameObject.floor.y + gameObject.floor.getHeight())))) {
             System.out.println(x);
             System.out.println(gameObject.floor.x);
             System.out.println(y);
@@ -229,30 +239,20 @@ public class Robot extends BaseObject{
     public void update(List<Ring> rings, double deltaTime) {
         if(this.team == Type.BLUE_TEAM) {
             if(Input.getInput().contains("SPACE")) {
-                force += forceChange * deltaTime;
-                if(force > 100) {
-                    force = 100;
-                    forceChange = -forceChange;
-                } else if(force < 0) {
-                    force = 0;
-                    forceChange = -forceChange;
-                }
+                isShoot += deltaTime;
             }
-            else if(force != 0) {
+            else if(isShoot != 0) {
                 Shoot(force, rings);
-                force = 0;
+                isShoot = 0;
             }
         }
         else {
             if(Input.getInput().contains("NUMPAD0")) {
-                force += forceChange * deltaTime;
-                if(force > 100) {
-                    force = 100;
-                    forceChange = -forceChange;
-                } else if(force < 0) {
-                    force = 0;
-                    forceChange = -forceChange;
-                }
+                isShoot += deltaTime;
+            }
+            else if(isShoot != 0) {
+                Shoot(force, rings);
+                isShoot = 0;
             }
             else if(force != 0) {
                 Shoot(force, rings);
@@ -274,7 +274,7 @@ public class Robot extends BaseObject{
             double vx = vxy*Math.cos(Math.toRadians(swivelAngle));
             double vy = vxy*Math.sin(Math.toRadians(swivelAngle));
             System.out.println(v);
-            Ring ring = new Ring(this.x + width/2 - Ring.widthRing/2, this.y + height/2-Ring.heightRing/2, vx, vy, vz, 8, team);
+            Ring ring = new Ring(this.x + width/2 - Ring.widthRing/2, this.y + height/2-Ring.heightRing/2, vx, vy, vz, 3, team);
             rings.add(ring);
             numberOfRing --;
         }

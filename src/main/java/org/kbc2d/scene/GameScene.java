@@ -39,17 +39,17 @@ public class GameScene extends BaseScene{
         // khởi tạo thành phần của game
         centerFloor = new CenterFloor();
         //pole
-        Pole pole1 = new Pole(10, 10, 480, 200,1);
-        Pole pole2 = new Pole(10, 10, 784, 200, 1);
-        Pole pole3 = new Pole(10, 10, 570, 290, 1);
-        Pole pole4 = new Pole(10, 10, 694, 290,1);
-        Pole pole5 = new Pole(10, 10, 480, 349,1);
-        Pole pole6 = new Pole(10, 10, 626, 341,3);
-        Pole pole7 = new Pole(10, 10, 784, 349,1);
-        Pole pole8 = new Pole(10, 10, 570, 414,1);
-        Pole pole9 = new Pole(10, 10, 694, 414,1);
-        Pole pole10 = new Pole(10, 10, 480, 504,1);
-        Pole pole11 = new Pole(10, 10, 784, 504,1);
+        Pole pole1 = new Pole(12, 10, 480, 200,1);
+        Pole pole2 = new Pole(12, 10, 784, 200, 1);
+        Pole pole3 = new Pole(12, 10, 570, 290, 1);
+        Pole pole4 = new Pole(12, 10, 694, 290,1);
+        Pole pole5 = new Pole(12, 10, 480, 349,1);
+        Pole pole6 = new Pole(12, 10, 626, 341,3);
+        Pole pole7 = new Pole(12, 10, 784, 349,1);
+        Pole pole8 = new Pole(12, 10, 570, 414,1);
+        Pole pole9 = new Pole(12, 10, 694, 414,1);
+        Pole pole10 = new Pole(12, 10, 480, 504,1);
+        Pole pole11 = new Pole(12, 10, 784, 504,1);
 
         poles.add(pole3);
         poles.add(pole1);
@@ -217,7 +217,7 @@ public class GameScene extends BaseScene{
         }
 
         //vòng trúng vào cột và tiếp tục đập vào cột
-        if(pole.ringTop == ring && distance > ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
+        if(pole.ringTop == ring && distance - 2> ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
 
             Vector2D difference = ring.getSpeed().subtract(projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
             Vector2D scaled = difference.multiply(2);
