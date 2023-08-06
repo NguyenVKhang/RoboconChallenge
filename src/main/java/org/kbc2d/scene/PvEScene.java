@@ -5,27 +5,27 @@ import org.kbc2d.game.object.Robot;
 import org.kbc2d.game.object.Type;
 
 public class PvEScene extends BaseScene{
+    public GameScene gameScene;
 
-    Robot robot = new Robot(Type.BLUE_TEAM);
-//    Ring ring = new Ring(600, 200);
 
-    float velX;
-    float velY;
-    float velZ;
+    public PvEScene() {
+        gameScene = new GameScene(GameType.PVE);
+    }
 
     @Override
     public void render() {
-        robot.render();
-//        ring.render();
+        gameScene.render();
+
     }
 
     @Override
     public void update(float deltaTime) {
-        robot.update(deltaTime);
+
+        gameScene.update(deltaTime);
     }
 
     @Override
     public void handleEvent() {
-
+        gameScene.handleEvent();
     }
 }

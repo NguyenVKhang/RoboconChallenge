@@ -1,7 +1,6 @@
 package org.kbc2d.scene.TrainingMode;
 
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import org.kbc2d.game.ui.*;
 import org.kbc2d.scene.BaseScene;
 import org.kbc2d.scene.SceneType;
@@ -12,11 +11,17 @@ import org.kbc2d.utils.SceneManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.kbc2d.constant.GlobalConstant.IMAGE_HIDDEN;
+import static org.kbc2d.constant.GlobalConstant.QWERTY;
+import static org.kbc2d.game.GameStatic.imagesLevel1Training;
+import static org.kbc2d.game.GameStatic.statusImagesLevel1Training;
+
 public class QuestionTutorialScene extends BaseScene {
-    public static final int IMAGE_HIDDEN = 9;
-    public static final int STATUS_IMAGE = 3;
+
+//    public static final int STATUS_IMAGE = 3;
     BackgroundGame backgroundGame;
     ButtonGame backGame;
+    ButtonGame responseQuestion;
  //   TextFieldGame textInput;
     ButtonGame checkAnswer;
 //    TextGame textGame;
@@ -25,13 +30,12 @@ public class QuestionTutorialScene extends BaseScene {
     Font font;
 
     // chứa trạng thái của ảnh
-    int statusImages[] = new int[IMAGE_HIDDEN];
 
     // chứa tất cả các trường hợp
 //    ButtonGame[][] buttonGamess = new ButtonGame[IMAGE_HIDDEN][STATUS_IMAGE];
 
     // chứa ảnh hiện tại
-    ButtonGame[] buttonGames = new ButtonGame[IMAGE_HIDDEN];
+
 
 
     List<List<String>> questionAnswer = new ArrayList<>();
@@ -46,12 +50,12 @@ public class QuestionTutorialScene extends BaseScene {
         formGame = new FormGame(500, 500, 200, 50, new DoClick() {
             @Override
             public void doClick() {
-                System.out.println("click");
+                formGame.setDropShadow(true);
             }
         }, new DoNotClick() {
             @Override
             public void doNotClick() {
-                System.out.println("not click");
+                formGame.setDropShadow(false);
             }
         }, new DoHover() {
             @Override
@@ -104,10 +108,10 @@ public class QuestionTutorialScene extends BaseScene {
 
 
         for(int i = 0; i < IMAGE_HIDDEN; i++) {
-            statusImages[i] = 1;
+            statusImagesLevel1Training[i] = 1;
 
             int finalI = i;
-            buttonGames[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 105, 150 + (i / 3) * 105, new DoClick() {
+            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 105, 150 + (i / 3) * 105, new DoClick() {
                 @Override
                 public void doClick() {
                     indexQuestionAnswer = finalI;
@@ -130,17 +134,16 @@ public class QuestionTutorialScene extends BaseScene {
         checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 400, new DoClick() {
             @Override
             public void doClick() {
-                // random 0 and 1
-                int random = (int) (Math.random() * 2);
-                if (random == 1) {
-                    buttonGames[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/img-" + Integer.toString(indexQuestionAnswer + 1) + ".png");
-                    statusImages[indexQuestionAnswer] = 2;
-                    indexQuestionAnswer = 10;
+                if (formGame.getTextInRectangle().equals(questionAnswer.get(indexQuestionAnswer).get(6))) {
+                    imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/img-" + Integer.toString(indexQuestionAnswer + 1) + ".png");
+                    statusImagesLevel1Training[indexQuestionAnswer] = 2;
                 } else {
-                    buttonGames[indexQuestionAnswer].setImage("asset/textures/training/false_question_image.png");
-                    statusImages[indexQuestionAnswer] = 0;
-                    indexQuestionAnswer = 10;
+                    imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/false_question_image.png");
+                    statusImagesLevel1Training[indexQuestionAnswer] = 0;
                 }
+                indexQuestionAnswer = 10;
+                formGame.setTextInRectangle("");
+
 
             }
         }, new DoHover() {
@@ -155,13 +158,47 @@ public class QuestionTutorialScene extends BaseScene {
             }
         });
 
+        responseQuestion = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Final.png", 700, 50, new DoClick() {
+            @Override
+            public void doClick() {
+                int count_true = 0;
+                for (int i = 0; i < IMAGE_HIDDEN; i++) {
+                    if (statusImagesLevel1Training[i] == 2) {
+                        count_true++;
+                    }
+                }
+                if (count_true < 6) {
+                    System.out.println("Bạn chưa trả lời đúng số câu hỏi tối thiểu.");
+                } else {
+                    SceneManager.setCurrentScene(SceneType.BOSS_QUESTION_SCENE);
+                }
+                indexQuestionAnswer = 10;
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                responseQuestion.setImage("asset/textures/ui/rectMenu/ButtonSet/FinalC.png");
+            }
+
+        },
+        new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                responseQuestion.setImage("asset/textures/ui/rectMenu/ButtonSet/Final.png");
+            }
+        });
+
+
 
 
         Input.addObjHandleClick(backGame);
         Input.addObjHandleHover(backGame);
 
+        Input.addObjHandleClick(responseQuestion);
+        Input.addObjHandleHover(responseQuestion);
+
         for (int i = 0; i < IMAGE_HIDDEN; i++) {
-            Input.addObjHandleClick(buttonGames[i]);
+            Input.addObjHandleClick(imagesLevel1Training[i]);
         }
 
         Input.addObjHandleClick(checkAnswer);
@@ -176,10 +213,11 @@ public class QuestionTutorialScene extends BaseScene {
     @Override
     public void render() {
         backgroundGame.render();
+        responseQuestion.render();
 
         backGame.render();
         for (int i = 0; i < IMAGE_HIDDEN; i++) {
-            buttonGames[i].render();
+            imagesLevel1Training[i].render();
         }
         if (indexQuestionAnswer != 10) {
       //      textInput.render();
@@ -187,13 +225,6 @@ public class QuestionTutorialScene extends BaseScene {
             checkAnswer.render();
         }
 
-//
-//
-//        for (int i = 0; i < IMAGE_HIDDEN; i++) {
-//            buttonGames[i].render();
-//        }
-//        // render text
-//        textGame.render();
         if (indexQuestionAnswer != 10) {
             textQuestionAnswer.render();
         }
@@ -204,6 +235,20 @@ public class QuestionTutorialScene extends BaseScene {
 
     @Override
     public void update(float deltaTime) {
+        if(formGame.getDropShadow()) {
+            for (int i = 0; i < QWERTY.length(); i++) {
+                if (Input.getInput().contains(Character.toString(QWERTY.charAt(i)))) {
+                    formGame.addCharacter(QWERTY.charAt(i));
+                    Input.getInput().remove(Character.toString(QWERTY.charAt(i)));
+                }
+            }
+            // check if backspace is pressed (to delete)
+            if (Input.getInput().contains("BACK_SPACE")) {
+                formGame.removeCharacter();
+                Input.getInput().remove("BACK_SPACE");
+
+            }
+        }
 
     }
 

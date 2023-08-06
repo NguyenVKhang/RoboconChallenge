@@ -2,9 +2,13 @@ package org.kbc2d.game.object;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import org.kbc2d.game.GameVars;
 import org.kbc2d.scene.Vector2D;
 import org.kbc2d.utils.ImageManager;
+
+import java.util.List;
+import java.util.Vector;
 
 public class Ring extends BaseObject{
     public static final double weight = 0.1;
@@ -17,6 +21,16 @@ public class Ring extends BaseObject{
     protected double speedY = 0;
     protected double speedZ = 0;
     protected double high = 0;
+
+    //TODO: DanhPB
+    protected double vectorOriginA;
+
+    protected double vectorOriginB;
+
+    protected double speedXOrigin;
+    protected double speedYOrigin;
+
+    double distanceFromRingToPole;
 
     public Ring() {
         super(ImageManager.getImage("asset/ring.png"));
@@ -33,6 +47,12 @@ public class Ring extends BaseObject{
         this.y = y;
         this.setWidth(32);
         this.setHeight(32);
+
+
+        vectorOriginA = 0;
+        vectorOriginB = 0;
+        speedXOrigin = 0;
+        speedYOrigin = 0;
     }
     public Ring(double x, double y, double speedX, double speedY, double speedZ, double height, Type team) {
         super();
@@ -50,6 +70,12 @@ public class Ring extends BaseObject{
         this.speedY = speedY;
         this.speedZ = speedZ;
         this.high = height;
+        //TODO: DanhPB
+
+        vectorOriginA = speedY / speedX;
+        vectorOriginB = -speedY / speedX * getCenter().x + getCenter().y;
+        speedXOrigin = speedX;
+        speedYOrigin = speedY;
     }
 
 
@@ -57,9 +83,7 @@ public class Ring extends BaseObject{
     public void setIn(boolean in) {
         isIn = in;
     }
-    public boolean getIn() {
-        return this.isIn;
-    }
+
 
     @Override
     public void render() {
@@ -67,6 +91,19 @@ public class Ring extends BaseObject{
         gc.drawImage(image, x, y, width, height);
         gc.fillText("height = " + high , this.x, this.y);
 
+
+        //mapping
+
+        if(Math.abs(distanceFromRingToPole) < 150 && high != 0) {
+            gc.save();
+            gc.fillRect(0, 0, 300, 200);
+            int poleWidth = 20;
+            int poleHeight = 100; //~10m
+            gc.setFill(Color.WHITE);
+            gc.fillRect(300/ 2 - poleWidth / 2, 200 - poleHeight, poleWidth, poleHeight);
+            gc.fillRect(300 / 2 + distanceFromRingToPole - 32 / 2, 200 - high * 10, 32, 4);
+        }
+        gc.restore();
     }
 
     @Override
@@ -84,6 +121,49 @@ public class Ring extends BaseObject{
             speedX = 0;
             speedY = 0;
             speedZ = 0;
+        }
+
+    }
+    //TODO: DanhPB
+    public void update(List<Pole> poleList) {
+        if(high != 0) {
+            distanceFromRingToPole = 9999999;
+            for(Pole pole: poleList) {
+                double poleRadius = pole.getWidth() / 2;
+                double ringRadius = width / 2;
+
+
+                double numerator = Math.abs(pole.getCenter().y- (vectorOriginA * pole.getCenter().x + vectorOriginB));
+                double denominator = Math.sqrt(vectorOriginA * vectorOriginA + 1);
+                double distanceFromPoleToLine = numerator / denominator;
+                
+                if(distanceFromPoleToLine < poleRadius + ringRadius) {
+                  if(Math.abs(distanceFromRingToPole)
+                          > Math.sqrt((getCenter().x - pole.getCenter().x) * (getCenter().x - pole.getCenter().x)
+                          + (getCenter().y - pole.getCenter().y) * (getCenter().y - pole.getCenter().y))) {
+
+
+                      distanceFromRingToPole
+                              = Math.sqrt((getCenter().x - pole.getCenter().x) * (getCenter().x - pole.getCenter().x)
+                              + (getCenter().y - pole.getCenter().y) * (getCenter().y - pole.getCenter().y));
+                  }
+
+
+                    if(speedXOrigin * (getCenter().x - pole.getCenter().x) + speedYOrigin * (getCenter().y - pole.getCenter().y) < 0) {
+                        distanceFromRingToPole = -distanceFromRingToPole;
+                    }
+
+
+
+
+                }
+//                else {
+//                    distanceFromRingToPole = 999999999;
+//                }
+
+
+
+            }
         }
 
     }
@@ -119,6 +199,8 @@ public class Ring extends BaseObject{
     public double getHigh() {
         return high;
     }
-
+    public Vector2D getPosition() {
+        return new Vector2D(x, y);
+    }
 }
 

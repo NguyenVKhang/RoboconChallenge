@@ -1,5 +1,7 @@
 package org.kbc2d.utils;
 
+import javafx.util.Pair;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +34,14 @@ public class ReadFileQuestionAnswering {
 
     public String getTextInFile() {
         return textInFile;
+    }
+
+    public String getQuestion() {
+        return textInFile.split("\n")[0];
+
+    }
+    public String getAnswer() {
+        return textInFile.split("\n")[1];
     }
 
     public List<List<String>> formatQuestionAnswering() {

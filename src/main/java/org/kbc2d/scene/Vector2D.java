@@ -45,5 +45,14 @@ public class Vector2D {
         return new Vector2D(deltaX, deltaY);
     }
 
+    public double calculateMagnitude() {
+        double x = this.x;
+        double y = this.y;
+
+        double magnitude = Math.sqrt(x * x + y * y);
+
+        return magnitude;
+    }
+
 
 }
