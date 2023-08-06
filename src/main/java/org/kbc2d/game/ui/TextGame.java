@@ -40,6 +40,16 @@ public class TextGame extends BaseComponent {
         GameVars.get("gc", GraphicsContext.class).fillText(text, x, y);
     }
 
+    public void setX_(int x) {
+        this.x = x;
+    }
+    public void getLengthTextPixel() {
+
+
+    }
+
+
+
     @Override
     public void update() {
 
@@ -48,5 +58,8 @@ public class TextGame extends BaseComponent {
     @Override
     public void handleEvent() {
 
+    }
+
+    public void setFont(String arial, FontWeight bold, int i) {
     }
 }

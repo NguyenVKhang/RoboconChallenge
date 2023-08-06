@@ -9,22 +9,26 @@ import javafx.scene.text.FontWeight;
 import org.kbc2d.constant.GlobalConstant;
 import org.kbc2d.game.GameVars;
 import org.kbc2d.game.object.*;
-import org.kbc2d.game.ui.BackgroundGame;
-import org.kbc2d.game.ui.TextGame;
+import org.kbc2d.game.ui.*;
 import org.kbc2d.utils.ImageManager;
+import org.kbc2d.utils.Input;
+import org.kbc2d.utils.SceneManager;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 
+import static org.kbc2d.game.GameStatic.BLUE_SCORE;
+import static org.kbc2d.game.GameStatic.BLUE_WIN;
+import static org.kbc2d.game.GameStatic.RED_SCORE;
+
 public class PvPScene extends BaseScene{
-    /// UI
+    /// UI cho những ngoài màn hình game chính như score, time, ... được đặt trong cụm /// UI              ///
     BackgroundGame backgroundGame;
     TextGame time_string;
     Font font_info;
+    ButtonGame backBtn;
 
-    String teamRed = "TEAM:\n RED";
-    String teamBlue = "TEAM:\nBLUE";
 
 
     ///
@@ -47,22 +51,48 @@ public class PvPScene extends BaseScene{
     TextGame pointString1;
     TextGame pointString2;
 
-
     float velX;
     float velY;
     float velZ;
     public PvPScene() {
         /// UI
-        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/Background.png");
-        time_string = new TextGame("Time Left: ", 1030, 150);
-        font_info = Font.font("Arial", FontWeight.BOLD, 40);
+        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround2.png");
+        time_string = new TextGame("Time Left: ", 598, 30);
+        font_info = Font.font("Arial", FontWeight.BOLD, 30);
 
-        pointString1 = new TextGame(Integer.toString(PointTeam1), 70, 400);
-        pointString2 = new TextGame(Integer.toString(PointTeam2), 1040, 400);
+        pointString1 = new TextGame(Integer.toString(PointTeam1), 110, 605);
+        pointString1.setFont_(new Font("Arial", 100));
+        pointString2 = new TextGame(Integer.toString(PointTeam2), 1105, 605);
+        pointString2.setFont_(new Font("Arial", 100));
+
+        backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 1100, 100, new DoClick() {
+            @Override
+            public void doClick() {
+                BLUE_WIN = false;
+                BLUE_SCORE = 0;
+                RED_SCORE = PointTeam2;
+                SceneManager.setCurrentScene(SceneType.LAST_GAME_SCENE);
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                backBtn.setImage("asset/textures/ui/hexMenu/backHover.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                backBtn.setImage("asset/textures/ui/hexMenu/back.png");
+            }
+
+        }
+        );
+
+        Input.addObjHandleClick(backBtn);
+        Input.addObjHandleHover(backBtn);
 
         ///
 
-        
+
 
         // khởi tạo thành phần của game
         centerFloor = new CenterFloor();
@@ -124,19 +154,20 @@ public class PvPScene extends BaseScene{
             rivers.add(river);
         }
         isEndGame = false;
-        timeGame = 180;
+        timeGame = 5 * 60;
 //        background = ImageManager.getImage("asset/Map.png");
     }
     @Override
     public void render() {
         /// UI
         backgroundGame.render();
+        backBtn.render();
         GameVars.get("gc", GraphicsContext.class).save();
-        GameVars.get("gc", GraphicsContext.class).setFill(Color.BLACK);
+        GameVars.get("gc", GraphicsContext.class).setFill(Color.WHITE);
 
         int second = (int)timeGame % 60;
         int minute = (int)timeGame / 60;
-        time_string.setText_("Time Left:\n    " + String.format("%02d:%02d", minute, second));
+        time_string.setText_(String.format("%02d:%02d", minute, second));
 
         time_string.setFont_(font_info);
         time_string.render();
@@ -144,19 +175,37 @@ public class PvPScene extends BaseScene{
         // set color blue
         GameVars.get("gc", GraphicsContext.class).setFill(Color.RED);
 
-        GameVars.get("gc", GraphicsContext.class).fillText("Team", 1070 ,500);
-        GameVars.get("gc", GraphicsContext.class).fillText("RED", 1085, 550);
-        pointString2.setText_("Score: " + Integer.toString(PointTeam2));
-        pointString2.render();
+//        GameVars.get("gc", GraphicsContext.class).fillText("Team", 1070 ,500);
+//        GameVars.get("gc", GraphicsContext.class).fillText("RED", 1085, 550);
+
+
+        pointString2.setText_(Integer.toString(PointTeam2));
+
+        if (PointTeam2 > 9) {
+            pointString2.setX_(1085);
+            pointString2.render();
+        } else {
+            pointString2.setX_(1110);
+            pointString2.render();
+        }
+
 
 
         // set color red
         GameVars.get("gc", GraphicsContext.class).setFill(Color.BLUE);
 
-        GameVars.get("gc", GraphicsContext.class).fillText("Team", 100, 500);
-        GameVars.get("gc", GraphicsContext.class).fillText("BLUE", 100, 550);
-        pointString1.setText_("Score: " + Integer.toString(PointTeam1));
-        pointString1.render();
+//        GameVars.get("gc", GraphicsContext.class).fillText("Team", 100, 500);
+//        GameVars.get("gc", GraphicsContext.class).fillText("BLUE", 100, 550);
+        pointString1.setText_(Integer.toString(PointTeam1));
+
+        if (PointTeam1 > 9) {
+            pointString1.setX_(80);
+            pointString1.render();
+        } else {
+            pointString1.setX_(110);
+            pointString1.render();
+        }
+
 
 
         GameVars.get("gc", GraphicsContext.class).restore();
@@ -213,11 +262,17 @@ public class PvPScene extends BaseScene{
         if(isEndGame) {
             String teamWin;
             if(PointTeam1 - PointTeam2 >= 0) {
-                teamWin = "Team Blue";
+//                teamWin = "Team Blue";
+
+                BLUE_WIN = true;
             } else {
-                teamWin = "Team Red";
+//                teamWin = "Team Red";
+                BLUE_WIN = false;
             }
-            System.out.println(teamWin + "chiến thắng với điểm số: " + Integer.toString(PointTeam1) + " " + Integer.toString(PointTeam2));
+            BLUE_SCORE = PointTeam1;
+            RED_SCORE = PointTeam2;
+            SceneManager.setCurrentScene(SceneType.LAST_GAME_SCENE);
+//            System.out.println(teamWin + "chiến thắng với điểm số: " + Integer.toString(PointTeam1) + " " + Integer.toString(PointTeam2));
         }
 
         for(Ring ring : rings) {

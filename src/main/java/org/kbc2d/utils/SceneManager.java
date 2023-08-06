@@ -1,6 +1,7 @@
 package org.kbc2d.utils;
 
 import org.kbc2d.scene.*;
+import org.kbc2d.scene.PvPMode.LastGameScene;
 import org.kbc2d.scene.TrainingMode.BossQuestionScene;
 import org.kbc2d.scene.TrainingMode.ExerciseTutorialScene;
 import org.kbc2d.scene.TrainingMode.QuestionTutorialScene;
@@ -42,7 +43,9 @@ public class SceneManager {
             case BOSS_QUESTION_SCENE:
                 currentScene = new BossQuestionScene();
                 break;
-
+            case LAST_GAME_SCENE:
+                currentScene = new LastGameScene();
+                break;
         }
     }
 }
