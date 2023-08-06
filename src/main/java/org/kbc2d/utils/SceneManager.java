@@ -29,9 +29,9 @@ public class SceneManager {
             case PvP_SCENE:
                 currentScene = new PvPScene();
                 break;
-            case SETTING_SCENE:
-                currentScene = new SettingScene();
-                break;
+//            case SETTING_SCENE:
+//                currentScene = new SettingScene();
+//                break;
 
 
             case EXERCISE_TUTORIAL_SCENE:
