@@ -116,6 +116,7 @@ public class QuestionTutorialScene extends BaseScene {
                 public void doClick() {
                     indexQuestionAnswer = finalI;
                     textQuestionAnswer.setText_(questionAnswer.get(finalI).get(0) + "\n" + questionAnswer.get(finalI).get(1) + "\n" + questionAnswer.get(finalI).get(2) + "\n" + questionAnswer.get(finalI).get(3) + "\n" + questionAnswer.get(finalI).get(4) + "\n" + questionAnswer.get(finalI).get(5));
+                    textQuestionAnswer.formatText(60);
                 }
             }, new DoHover() {
                 @Override
@@ -226,6 +227,7 @@ public class QuestionTutorialScene extends BaseScene {
         }
 
         if (indexQuestionAnswer != 10) {
+
             textQuestionAnswer.render();
         }
 //
