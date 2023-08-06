@@ -69,7 +69,6 @@ public class Robot extends BaseObject{
 
         gc.setFont(Font.font("Arial", 10));
         gc.setFill(Color.BLACK);
-        gc.strokeRect(x, y, width, height);
         gc.fillText("Shooting angle = " + (int) shootingAngle, x-20, y-20);
         gc.fillText("Force = " + (int) force, x-10, y-10);
     }
@@ -128,8 +127,10 @@ public class Robot extends BaseObject{
                 //check va chạm giữa người chơi và vòng
                 for (int i = gameObject.rings.size() - 1; i >= 0; i--) {
                     if (gameObject.rings.get(i).getCenter().distanceTo(this.getCenter()) < 20) {
-                        gameObject.rings.remove(i);
-                        this.setNumberOfRing(this.getNumberOfRing() + 1);
+                        if(!gameObject.rings.get(i).isIn()) {
+                            gameObject.rings.remove(i);
+                            this.setNumberOfRing(this.getNumberOfRing() + 1);
+                        }
                     }
                 }
             }

@@ -86,12 +86,15 @@ public class Ring extends BaseObject{
         isIn = in;
     }
 
+    public boolean isIn() {
+        return isIn;
+    }
 
     @Override
     public void render() {
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
         gc.drawImage(image, x, y, width, height);
-        gc.fillText("height = " + high , this.x, this.y);
+        gc.fillText("height = " + (int) high , this.x, this.y);
 
 
         //mapping
