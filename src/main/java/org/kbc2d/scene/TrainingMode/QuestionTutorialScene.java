@@ -45,6 +45,9 @@ public class QuestionTutorialScene extends BaseScene {
     FormGame formGame;
 
 
+    ButtonGame notificationButton;
+    boolean isNotifation = false;
+
     public QuestionTutorialScene() {
      //   textInput = new TextFieldGame(700, 700, 100, 50);
         formGame = new FormGame(150, 450, 200, 50, new DoClick() {
@@ -68,7 +71,24 @@ public class QuestionTutorialScene extends BaseScene {
 //                System.out.println("not hover");
             }
         });
+        notificationButton = new ButtonGame("asset/textures/ui/rectMenu/notification.png", 320, 180, new DoClick() {
+            @Override
+            public void doClick() {
+                if(isNotifation == true){
+                    isNotifation = false;
+                }
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+            }
 
+        }
+        );
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
 //
         backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 600, new DoClick() {
@@ -169,7 +189,7 @@ public class QuestionTutorialScene extends BaseScene {
                     }
                 }
                 if (count_true < 6) {
-                    System.out.println("Bạn chưa trả lời đúng số câu hỏi tối thiểu.");
+                    isNotifation = true;
                 } else {
                     SceneManager.setCurrentScene(SceneType.BOSS_QUESTION_SCENE);
                 }
@@ -208,27 +228,35 @@ public class QuestionTutorialScene extends BaseScene {
         Input.addObjHandleClick(formGame);
         Input.addObjHandleHover(formGame);
 
+
+        Input.addObjHandleClick(notificationButton);
+
     }
 
 
     @Override
     public void render() {
         backgroundGame.render();
-        responseQuestion.render();
+        if(isNotifation == true){
+            notificationButton.render();
+        } else {
 
-        backGame.render();
-        for (int i = 0; i < IMAGE_HIDDEN; i++) {
-            imagesLevel1Training[i].render();
-        }
-        if (indexQuestionAnswer != 10) {
-      //      textInput.render();
-            formGame.render();
-            checkAnswer.render();
-        }
+            responseQuestion.render();
 
-        if (indexQuestionAnswer != 10) {
+            backGame.render();
+            for (int i = 0; i < IMAGE_HIDDEN; i++) {
+                imagesLevel1Training[i].render();
+            }
+            if (indexQuestionAnswer != 10) {
+                //      textInput.render();
+                formGame.render();
+                checkAnswer.render();
+            }
 
-            textQuestionAnswer.render();
+            if (indexQuestionAnswer != 10) {
+
+                textQuestionAnswer.render();
+            }
         }
 //
 //

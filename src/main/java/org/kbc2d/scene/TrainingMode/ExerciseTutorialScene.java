@@ -1,10 +1,7 @@
 package org.kbc2d.scene.TrainingMode;
 
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import org.kbc2d.game.GameVars;
 import org.kbc2d.game.ui.*;
 import org.kbc2d.scene.BaseScene;
 import org.kbc2d.scene.SceneType;
@@ -24,6 +21,8 @@ public class ExerciseTutorialScene extends BaseScene {
 
     BackgroundGame backgroundGame;
     VideoGame videoGame;
+
+
 
 
 
@@ -76,6 +75,10 @@ public class ExerciseTutorialScene extends BaseScene {
         }
         );
 
+
+
+
+
         nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 1130, 600, new DoClick() {
             @Override
             public void doClick() {
@@ -108,6 +111,7 @@ public class ExerciseTutorialScene extends BaseScene {
         Input.addObjHandleHover(nextBtn);
 
 
+
     }
 
 
@@ -119,6 +123,8 @@ public class ExerciseTutorialScene extends BaseScene {
         videoGame.render();
 
         textGame.render();
+
+
 //        nextE.render();
 
 //        GameVars.get("gc", javafx.scene.canvas.GraphicsContext.class).drawImage(webView.snapshot(null, null), 100, 100);
@@ -132,34 +138,7 @@ public class ExerciseTutorialScene extends BaseScene {
 
     @Override
     public void handleEvent() {
-//        GameVars.get("scene", Scene.class).setOnMouseClicked(
-//                mouseEvent -> {
-//                    if (backBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-//                        SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
-//                    }
-//                    else if (nextBtn.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-//                        SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
-//                    }
-//                }
-//
-//
-//        );
-//        GameVars.get("scene", Scene.class).setOnMouseMoved(
-//                mouseEvent -> {
-//                    if (backE.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-//                        backE = backBtnC;
-//                    }
-//                    else {
-//                        backE = backBtn;
-//                    }
-//                    if (nextE.handleClick((float) mouseEvent.getX(), (float) mouseEvent.getY())) {
-//                        nextE = nextBtnC;
-//                    }
-//                    else {
-//                        nextE = nextBtn;
-//                    }
-//
-//                });
+
 
     }
 }
