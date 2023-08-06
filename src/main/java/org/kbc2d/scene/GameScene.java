@@ -213,6 +213,7 @@ public class GameScene extends BaseScene{
             pointString1.setX_(80);
             pointString1.render();
         } else {
+            System.out.print(123);
             pointString1.setX_(110);
             pointString1.render();
         }

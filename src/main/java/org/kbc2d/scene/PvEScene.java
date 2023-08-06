@@ -5,27 +5,26 @@ import org.kbc2d.game.object.Robot;
 import org.kbc2d.game.object.Type;
 
 public class PvEScene extends BaseScene{
-    public GameScene gameScene;
+
 
 
     public PvEScene() {
-        gameScene = new GameScene(GameType.PVE);
+
     }
 
     @Override
     public void render() {
-        gameScene.render();
 
     }
 
     @Override
     public void update(float deltaTime) {
 
-        gameScene.update(deltaTime);
+
     }
 
     @Override
     public void handleEvent() {
-        gameScene.handleEvent();
+
     }
 }
