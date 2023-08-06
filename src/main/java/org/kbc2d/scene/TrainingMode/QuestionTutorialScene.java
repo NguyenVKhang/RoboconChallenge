@@ -21,7 +21,7 @@ public class QuestionTutorialScene extends BaseScene {
 //    public static final int STATUS_IMAGE = 3;
     BackgroundGame backgroundGame;
     ButtonGame backGame;
-    ButtonGame responeQuestion;
+    ButtonGame responseQuestion;
  //   TextFieldGame textInput;
     ButtonGame checkAnswer;
 //    TextGame textGame;
@@ -111,11 +111,12 @@ public class QuestionTutorialScene extends BaseScene {
             statusImagesLevel1Training[i] = 1;
 
             int finalI = i;
-            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 105, 150 + (i / 3) * 105, new DoClick() {
+            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 160, 160 + (i / 3) * 160, new DoClick() {
                 @Override
                 public void doClick() {
                     indexQuestionAnswer = finalI;
                     textQuestionAnswer.setText_(questionAnswer.get(finalI).get(0) + "\n" + questionAnswer.get(finalI).get(1) + "\n" + questionAnswer.get(finalI).get(2) + "\n" + questionAnswer.get(finalI).get(3) + "\n" + questionAnswer.get(finalI).get(4) + "\n" + questionAnswer.get(finalI).get(5));
+                    textQuestionAnswer.formatText(60);
                 }
             }, new DoHover() {
                 @Override
@@ -135,7 +136,7 @@ public class QuestionTutorialScene extends BaseScene {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(questionAnswer.get(indexQuestionAnswer).get(6))) {
-                    imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/img-" + Integer.toString(indexQuestionAnswer + 1) + ".png");
+                    imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/" + Integer.toString(indexQuestionAnswer + 1) + ".png");
                     statusImagesLevel1Training[indexQuestionAnswer] = 2;
                 } else {
                     imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/false_question_image.png");
@@ -158,7 +159,7 @@ public class QuestionTutorialScene extends BaseScene {
             }
         });
 
-        responeQuestion = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 700, 50, new DoClick() {
+        responseQuestion = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Final.png", 700, 50, new DoClick() {
             @Override
             public void doClick() {
                 int count_true = 0;
@@ -177,14 +178,14 @@ public class QuestionTutorialScene extends BaseScene {
         }, new DoHover() {
             @Override
             public void doHover() {
-                responeQuestion.setImage("asset/textures/ui/hexMenu/continueHover.png");
+                responseQuestion.setImage("asset/textures/ui/rectMenu/ButtonSet/FinalC.png");
             }
 
         },
         new DoNotHover() {
             @Override
             public void doNotHover() {
-                responeQuestion.setImage("asset/textures/ui/hexMenu/continue.png");
+                responseQuestion.setImage("asset/textures/ui/rectMenu/ButtonSet/Final.png");
             }
         });
 
@@ -194,8 +195,8 @@ public class QuestionTutorialScene extends BaseScene {
         Input.addObjHandleClick(backGame);
         Input.addObjHandleHover(backGame);
 
-        Input.addObjHandleClick(responeQuestion);
-        Input.addObjHandleHover(responeQuestion);
+        Input.addObjHandleClick(responseQuestion);
+        Input.addObjHandleHover(responseQuestion);
 
         for (int i = 0; i < IMAGE_HIDDEN; i++) {
             Input.addObjHandleClick(imagesLevel1Training[i]);
@@ -213,7 +214,7 @@ public class QuestionTutorialScene extends BaseScene {
     @Override
     public void render() {
         backgroundGame.render();
-        responeQuestion.render();
+        responseQuestion.render();
 
         backGame.render();
         for (int i = 0; i < IMAGE_HIDDEN; i++) {
@@ -226,6 +227,7 @@ public class QuestionTutorialScene extends BaseScene {
         }
 
         if (indexQuestionAnswer != 10) {
+
             textQuestionAnswer.render();
         }
 //

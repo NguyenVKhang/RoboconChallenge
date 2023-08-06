@@ -1,6 +1,11 @@
 package org.kbc2d.game.object;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+
 import org.kbc2d.game.GameVars;
 import org.kbc2d.scene.GameScene;
 import org.kbc2d.scene.Vector2D;
@@ -61,6 +66,9 @@ public class Robot extends BaseObject{
         gc.rotate(swivelAngle);
         gc.drawImage(image, -width / 2, -height / 2, width, height);
         gc.restore();
+
+        gc.setFont(Font.font("Arial", 10));
+        gc.setFill(Color.BLACK);
         gc.strokeRect(x, y, width, height);
         gc.fillText("Shooting angle = " + (int) shootingAngle, x-20, y-20);
         gc.fillText("Force = " + (int) force, x-10, y-10);

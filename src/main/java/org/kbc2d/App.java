@@ -31,6 +31,7 @@ public class App extends Application {
         Input.attachEventHandle(scene);
         stage.setScene(scene);
         stage.show();
+
         SceneManager.setCurrentScene(SceneType.HOME_SCENE);
 
         GameLoop.start();

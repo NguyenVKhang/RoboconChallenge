@@ -25,4 +25,10 @@ public class GameStatic {
             e.printStackTrace();
         }
     }
+
+
+   // static lung tung
+    public static boolean BLUE_WIN = true;
+    public static int BLUE_SCORE = 10;
+    public static int RED_SCORE = 10;
 }

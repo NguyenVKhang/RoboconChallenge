@@ -2,16 +2,32 @@ package org.kbc2d.scene;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import org.kbc2d.game.GameVars;
 import org.kbc2d.game.object.*;
-import org.kbc2d.game.ui.TextGame;
+import org.kbc2d.game.ui.*;
 import org.kbc2d.utils.ImageManager;
+import org.kbc2d.utils.Input;
+import org.kbc2d.utils.SceneManager;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.kbc2d.game.GameStatic.*;
+
 public class GameScene extends BaseScene{
+    /// UI cho những ngoài màn hình game chính như score, time, ... được đặt trong cụm /// UI              ///
+    BackgroundGame backgroundGame;
+    TextGame time_string;
+    Font font_info;
+    ButtonGame backBtn;
+
+
+
+    ///
 
     public List<Ring> rings = new ArrayList<>();
     GameType gameType;
@@ -28,6 +44,7 @@ public class GameScene extends BaseScene{
     public int PointTeam1 = 0;
     public int PointTeam2 = 0;
     TextGame pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
+
     TextGame pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
 
     Image background;
@@ -36,6 +53,45 @@ public class GameScene extends BaseScene{
     float velY;
     float velZ;
     public GameScene(GameType gameType) {
+
+        backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround2.png");
+
+        time_string = new TextGame("", 600, 35);
+
+        font_info = Font.font("Arial", FontWeight.BOLD, 30);
+        pointString1 = new TextGame(Integer.toString(PointTeam1), 70, 610);
+
+        pointString1.setFont_(new Font("Arial", 100));
+        pointString2 = new TextGame(Integer.toString(PointTeam2), 1040, 610);
+        pointString2.setFont_(new Font("Arial", 100));
+
+        backBtn = new ButtonGame("asset/textures/ui/rectMenu/ButtonSet/Surrender.png", 990, 100, new DoClick() {
+            @Override
+            public void doClick() {
+                BLUE_WIN = false;
+                BLUE_SCORE = 0;
+                RED_SCORE = PointTeam2;
+                SceneManager.setCurrentScene(SceneType.LAST_GAME_SCENE);
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+                backBtn.setImage("asset/textures/ui/rectMenu/ButtonSet/SurrenderC.png");
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+                backBtn.setImage("asset/textures/ui/rectMenu/ButtonSet/Surrender.png");
+            }
+
+        }
+        );
+        Input.addObjHandleClick(backBtn);
+        Input.addObjHandleHover(backBtn);
+
+
+
+
         this.gameType = gameType;
         // khởi tạo thành phần của game
         centerFloor = new CenterFloor();
@@ -108,6 +164,7 @@ public class GameScene extends BaseScene{
         isEndGame = false;
         timeGame = 180;
         background = ImageManager.getImage("asset/Map.png");
+<<<<<<< HEAD
         //robot và enemy
         if(gameType == GameType.PVP) {
             robot = new Robot(Type.BLUE_TEAM);
@@ -118,9 +175,69 @@ public class GameScene extends BaseScene{
             robot.setNumberOfRing(1000);
             enemy = new Robot(Type.BLUE_TEAM);
         }
+=======
+        Input.addObjHandleClick(backBtn);
+        Input.addObjHandleHover(backBtn);
+
+>>>>>>> 82433c3356802789f26527df947ceda393d5d77a
     }
     @Override
     public void render() {
+        /// UI
+        backgroundGame.render();
+
+        GameVars.get("gc", GraphicsContext.class).save();
+        GameVars.get("gc", GraphicsContext.class).setFill(Color.WHITE);
+
+        int second = (int)timeGame % 60;
+        int minute = (int)timeGame / 60;
+        time_string.setText_(String.format("%02d:%02d", minute, second));
+
+        //save
+        time_string.setFont_(font_info);
+        time_string.render();
+
+        // set color blue
+        GameVars.get("gc", GraphicsContext.class).setFill(Color.RED);
+
+//        GameVars.get("gc", GraphicsContext.class).fillText("Team", 1070 ,500);
+//        GameVars.get("gc", GraphicsContext.class).fillText("RED", 1085, 550);
+
+
+        pointString2.setText_(Integer.toString(PointTeam2));
+
+        if (PointTeam2 > 9) {
+            pointString2.setX_(1085);
+            pointString2.render();
+        } else {
+            pointString2.setX_(1110);
+            pointString2.render();
+        }
+
+
+
+        // set color red
+        GameVars.get("gc", GraphicsContext.class).setFill(Color.BLUE);
+
+//        GameVars.get("gc", GraphicsContext.class).fillText("Team", 100, 500);
+//        GameVars.get("gc", GraphicsContext.class).fillText("BLUE", 100, 550);
+        pointString1.setText_(Integer.toString(PointTeam1));
+
+        if (PointTeam1 > 9) {
+            pointString1.setX_(80);
+            pointString1.render();
+        } else {
+            pointString1.setX_(110);
+            pointString1.render();
+        }
+
+
+
+        GameVars.get("gc", GraphicsContext.class).restore();
+
+
+
+        ///
         floorEnemy.render();
         floor.render();
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
@@ -138,10 +255,8 @@ public class GameScene extends BaseScene{
         robot.render();
         enemy.render();
 
-        pointString1.render();
 
-
-        pointString2.render();
+        backBtn.render();
     }
 
     @Override
@@ -167,13 +282,17 @@ public class GameScene extends BaseScene{
             isEndGame = true;
         }
         if(isEndGame) {
-            String teamWin;
+
             if(PointTeam1 - PointTeam2 >= 0) {
-                teamWin = "Team Blue";
+                BLUE_WIN = true;
+
+
             } else {
-                teamWin = "Team Red";
+                BLUE_WIN = false;
             }
-            System.out.println(teamWin + "chiến thắng với điểm số: " + Integer.toString(PointTeam1) + " " + Integer.toString(PointTeam2));
+            BLUE_SCORE = PointTeam1;
+            RED_SCORE = PointTeam2;
+            SceneManager.setCurrentScene(SceneType.LAST_GAME_SCENE);
         }
 
         if (!rings.isEmpty()) {
@@ -285,5 +404,6 @@ public class GameScene extends BaseScene{
     public void handleEvent() {
 
     }
+
 
 }

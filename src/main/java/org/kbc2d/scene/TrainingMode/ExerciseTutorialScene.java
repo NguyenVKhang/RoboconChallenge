@@ -57,7 +57,10 @@ public class ExerciseTutorialScene extends BaseScene {
         backBtn = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 600, new DoClick() {
             @Override
             public void doClick() {
+
                 SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
+                videoGame.stop();
+                videoGame.setPlay();
             }
         }, new DoHover() {
             @Override
@@ -76,7 +79,10 @@ public class ExerciseTutorialScene extends BaseScene {
         nextBtn = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 1130, 600, new DoClick() {
             @Override
             public void doClick() {
+
                 SceneManager.setCurrentScene(SceneType.QUESTION_TUTORIAL_SCENE);
+                videoGame.stop();
+                videoGame.setPlay();
             }
         }, new DoHover() {
             @Override

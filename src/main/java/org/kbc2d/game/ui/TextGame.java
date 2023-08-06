@@ -40,6 +40,16 @@ public class TextGame extends BaseComponent {
         GameVars.get("gc", GraphicsContext.class).fillText(text, x, y);
     }
 
+    public void setX_(int x) {
+        this.x = x;
+    }
+    public void getLengthTextPixel() {
+
+
+    }
+
+
+
     @Override
     public void update() {
 
@@ -48,5 +58,28 @@ public class TextGame extends BaseComponent {
     @Override
     public void handleEvent() {
 
+    }
+
+    public void setFont(String arial, FontWeight bold, int i) {
+    }
+
+    public void formatText(int lenOfLine) {
+        // if len(text) > i: break
+        int count = 0;
+        String result = "";
+        for(int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '\n') {
+                count = 0;
+
+            }
+            count++;
+            if (count > lenOfLine && text.charAt(i) == ' ') {
+                count = 0;
+                result += '\n';
+                continue;
+            }
+            result += text.charAt(i);
+        }
+        this.text = result;
     }
 }
