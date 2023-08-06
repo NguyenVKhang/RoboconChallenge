@@ -8,19 +8,34 @@ import org.kbc2d.utils.ImageManager;
 public class Pole extends BaseObject {
     private double heightPole;
     private double point;
+    public int type;
+    public Ring ringTop = null;
     private Type team = Type.NO_TEAM;
 
-    public Pole(double heightPole, double point, double x, double y) {
-        super(x, y, ImageManager.getImage("asset/pole.png"));
+    public Pole(double heightPole, double point, double x, double y, int type) {
+        super();
+        if(type == 1) {
+            super.setImage(ImageManager.getImage("asset/LV1.png"));
+        } else {
+            super.setImage(ImageManager.getImage("asset/LV3.png"));
+        }
         this.setWidth(8);
         this.setHeight(8);
         this.heightPole = heightPole;
         this.point = point;
+        this.type = type;
+        this.x = x;
+        this.y = y;
     }
     @Override
     public void render() {
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
-        gc.drawImage(image, x, y, width, height);
+        if(type == 1) {
+
+            gc.drawImage(image, x, y, 16, 16);
+        } else {
+            gc.drawImage(image, x, y, 32, 32);
+        }
         gc.fillText("height = " + heightPole , this.x, this.y);
     }
 
@@ -51,5 +66,8 @@ public class Pole extends BaseObject {
 
     public double getPoint() {
         return point;
+    }
+    public Vector2D getPosition() {
+        return new Vector2D(x, y);
     }
 }
