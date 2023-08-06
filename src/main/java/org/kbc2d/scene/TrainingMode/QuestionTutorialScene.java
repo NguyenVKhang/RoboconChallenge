@@ -45,9 +45,12 @@ public class QuestionTutorialScene extends BaseScene {
     FormGame formGame;
 
 
+    ButtonGame notificationButton;
+    boolean isNotifation = false;
+
     public QuestionTutorialScene() {
      //   textInput = new TextFieldGame(700, 700, 100, 50);
-        formGame = new FormGame(500, 500, 200, 50, new DoClick() {
+        formGame = new FormGame(150, 500, 200, 50, new DoClick() {
             @Override
             public void doClick() {
                 formGame.setDropShadow(true);
@@ -68,7 +71,24 @@ public class QuestionTutorialScene extends BaseScene {
 //                System.out.println("not hover");
             }
         });
+        notificationButton = new ButtonGame("asset/textures/ui/rectMenu/notification.png", 320, 180, new DoClick() {
+            @Override
+            public void doClick() {
+                if(isNotifation == true){
+                    isNotifation = false;
+                }
+            }
+        }, new DoHover() {
+            @Override
+            public void doHover() {
+            }
+        }, new DoNotHover() {
+            @Override
+            public void doNotHover() {
+            }
 
+        }
+        );
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
 //
         backGame = new ButtonGame("asset/textures/ui/hexMenu/back.png", 10, 600, new DoClick() {
@@ -101,7 +121,7 @@ public class QuestionTutorialScene extends BaseScene {
         String textquestionanswer = questionAnswer.get(0).get(0) + "\n" + questionAnswer.get(0).get(1) + "\n" + questionAnswer.get(0).get(2) + "\n" + questionAnswer.get(0).get(3) + "\n" + questionAnswer.get(0).get(4);
 //
 //
-        textQuestionAnswer = new TextGame(textquestionanswer, 100, 150);
+        textQuestionAnswer = new TextGame(textquestionanswer, 100, 200);
         textQuestionAnswer.setFont_(font);
 //
 //        textFieldGame = new TextFieldGame(100, 500, 200, 50);
@@ -111,7 +131,7 @@ public class QuestionTutorialScene extends BaseScene {
             statusImagesLevel1Training[i] = 1;
 
             int finalI = i;
-            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 160, 160 + (i / 3) * 160, new DoClick() {
+            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i / 3 * 160, 160 + (i % 3) * 160, new DoClick() {
                 @Override
                 public void doClick() {
                     indexQuestionAnswer = finalI;
@@ -132,7 +152,7 @@ public class QuestionTutorialScene extends BaseScene {
         }
 
 
-        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 400, new DoClick() {
+        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/check.png", 400, 475, new DoClick() {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(questionAnswer.get(indexQuestionAnswer).get(6))) {
@@ -150,12 +170,12 @@ public class QuestionTutorialScene extends BaseScene {
         }, new DoHover() {
             @Override
             public void doHover() {
-                checkAnswer.setImage("asset/textures/ui/hexMenu/continueHover.png");
+//                checkAnswer.setImage("asset/textures/ui/hexMenu/continueHover.png");
             }
         }, new DoNotHover() {
             @Override
             public void doNotHover() {
-                checkAnswer.setImage("asset/textures/ui/hexMenu/continue.png");
+//                checkAnswer.setImage("asset/textures/ui/hexMenu/continue.png");
             }
         });
 
@@ -169,7 +189,7 @@ public class QuestionTutorialScene extends BaseScene {
                     }
                 }
                 if (count_true < 6) {
-                    System.out.println("Bạn chưa trả lời đúng số câu hỏi tối thiểu.");
+                    isNotifation = true;
                 } else {
                     SceneManager.setCurrentScene(SceneType.BOSS_QUESTION_SCENE);
                 }
@@ -208,27 +228,35 @@ public class QuestionTutorialScene extends BaseScene {
         Input.addObjHandleClick(formGame);
         Input.addObjHandleHover(formGame);
 
+
+        Input.addObjHandleClick(notificationButton);
+
     }
 
 
     @Override
     public void render() {
         backgroundGame.render();
-        responseQuestion.render();
+        if(isNotifation == true){
+            notificationButton.render();
+        } else {
 
-        backGame.render();
-        for (int i = 0; i < IMAGE_HIDDEN; i++) {
-            imagesLevel1Training[i].render();
-        }
-        if (indexQuestionAnswer != 10) {
-      //      textInput.render();
-            formGame.render();
-            checkAnswer.render();
-        }
+            responseQuestion.render();
 
-        if (indexQuestionAnswer != 10) {
+            backGame.render();
+            for (int i = 0; i < IMAGE_HIDDEN; i++) {
+                imagesLevel1Training[i].render();
+            }
+            if (indexQuestionAnswer != 10) {
+                //      textInput.render();
+                formGame.render();
+                checkAnswer.render();
+            }
 
-            textQuestionAnswer.render();
+            if (indexQuestionAnswer != 10) {
+
+                textQuestionAnswer.render();
+            }
         }
 //
 //

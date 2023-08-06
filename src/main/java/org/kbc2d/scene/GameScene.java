@@ -43,9 +43,9 @@ public class GameScene extends BaseScene{
     public Floor floorEnemy = new Floor(Type.RED_TEAM);
     public int PointTeam1 = 0;
     public int PointTeam2 = 0;
-    TextGame pointString1 = new TextGame(Integer.toString(PointTeam1), 10, 10);
+    TextGame pointString1;
 
-    TextGame pointString2 = new TextGame(Integer.toString(PointTeam2), 310, 10);
+    TextGame pointString2;
 
     Image background;
 
