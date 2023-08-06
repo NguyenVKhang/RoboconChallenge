@@ -22,15 +22,16 @@ public class BossQuestionScene extends BaseScene {
     ReadFileQuestionAnswering readFileQuestionAnswering;
     String question;
     String answer;
+    TextGame textQuestionAnswer;
 
 
     public BossQuestionScene() {
         readFileQuestionAnswering = new ReadFileQuestionAnswering("src/main/resources/org/kbc2d/asset/data/level1_question_boss.txt");
         question = readFileQuestionAnswering.getQuestion();
         answer = readFileQuestionAnswering.getAnswer();
-
-
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
+        textQuestionAnswer = new TextGame(question, 100, 200);
+        textQuestionAnswer.setFont_(new Font("Ariel", 50));
         checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/check.png", 400, 475, new DoClick() {
             @Override
             public void doClick() {
@@ -100,6 +101,7 @@ public class BossQuestionScene extends BaseScene {
 
         backgroundGame.render();
         formGame.render();
+        textQuestionAnswer.render();
         checkAnswer.render();
         for (int i = 0; i < IMAGE_HIDDEN; i++) {
             imagesLevel1Training[i].render();
