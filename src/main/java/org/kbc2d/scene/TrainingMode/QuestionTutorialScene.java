@@ -47,7 +47,7 @@ public class QuestionTutorialScene extends BaseScene {
 
     public QuestionTutorialScene() {
      //   textInput = new TextFieldGame(700, 700, 100, 50);
-        formGame = new FormGame(500, 500, 200, 50, new DoClick() {
+        formGame = new FormGame(150, 450, 200, 50, new DoClick() {
             @Override
             public void doClick() {
                 formGame.setDropShadow(true);
