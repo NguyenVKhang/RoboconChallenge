@@ -111,7 +111,7 @@ public class QuestionTutorialScene extends BaseScene {
             statusImagesLevel1Training[i] = 1;
 
             int finalI = i;
-            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 105, 150 + (i / 3) * 105, new DoClick() {
+            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 160, 160 + (i / 3) * 160, new DoClick() {
                 @Override
                 public void doClick() {
                     indexQuestionAnswer = finalI;
@@ -136,7 +136,7 @@ public class QuestionTutorialScene extends BaseScene {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(questionAnswer.get(indexQuestionAnswer).get(6))) {
-                    imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/img-" + Integer.toString(indexQuestionAnswer + 1) + ".png");
+                    imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/trueQuestion/" + Integer.toString(indexQuestionAnswer + 1) + ".png");
                     statusImagesLevel1Training[indexQuestionAnswer] = 2;
                 } else {
                     imagesLevel1Training[indexQuestionAnswer].setImage("asset/textures/training/false_question_image.png");
