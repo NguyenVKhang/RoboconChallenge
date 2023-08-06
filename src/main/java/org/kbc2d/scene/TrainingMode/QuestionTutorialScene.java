@@ -50,7 +50,7 @@ public class QuestionTutorialScene extends BaseScene {
 
     public QuestionTutorialScene() {
      //   textInput = new TextFieldGame(700, 700, 100, 50);
-        formGame = new FormGame(150, 450, 200, 50, new DoClick() {
+        formGame = new FormGame(150, 500, 200, 50, new DoClick() {
             @Override
             public void doClick() {
                 formGame.setDropShadow(true);
@@ -121,7 +121,7 @@ public class QuestionTutorialScene extends BaseScene {
         String textquestionanswer = questionAnswer.get(0).get(0) + "\n" + questionAnswer.get(0).get(1) + "\n" + questionAnswer.get(0).get(2) + "\n" + questionAnswer.get(0).get(3) + "\n" + questionAnswer.get(0).get(4);
 //
 //
-        textQuestionAnswer = new TextGame(textquestionanswer, 100, 150);
+        textQuestionAnswer = new TextGame(textquestionanswer, 100, 200);
         textQuestionAnswer.setFont_(font);
 //
 //        textFieldGame = new TextFieldGame(100, 500, 200, 50);
@@ -131,7 +131,7 @@ public class QuestionTutorialScene extends BaseScene {
             statusImagesLevel1Training[i] = 1;
 
             int finalI = i;
-            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i % 3 * 160, 160 + (i / 3) * 160, new DoClick() {
+            imagesLevel1Training[i] = new ButtonGame("asset/textures/training/hidden_image.png", 700 + i / 3 * 160, 160 + (i % 3) * 160, new DoClick() {
                 @Override
                 public void doClick() {
                     indexQuestionAnswer = finalI;
@@ -152,7 +152,7 @@ public class QuestionTutorialScene extends BaseScene {
         }
 
 
-        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 400, new DoClick() {
+        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 470, new DoClick() {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(questionAnswer.get(indexQuestionAnswer).get(6))) {
