@@ -18,7 +18,7 @@ public class Robot extends BaseObject{
     private int numberOfRing;
     //    private static double height = 10;
     protected double swivelAngle;
-    private double forceMax = 10;
+    private double forceMax = 5;
 
     private Type team;
     protected double shootingAngle;
