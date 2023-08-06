@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Vector;
 
 public class Ring extends BaseObject{
+
+    public double timeAlive = 10;
     public static final double weight = 0.1;
     public static final double thickness = 1;
     public static final double widthRing = 32;

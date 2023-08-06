@@ -8,6 +8,7 @@ import org.kbc2d.game.ui.TextGame;
 import org.kbc2d.utils.ImageManager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GameScene extends BaseScene{
@@ -19,9 +20,9 @@ public class GameScene extends BaseScene{
     public boolean isEndGame;
     private double timeGame;
     public List<Pole> poles = new ArrayList<>();
-    public Robot enemy = new Robot(Type.RED_TEAM);
+    public Robot enemy;
 
-    public Robot robot = new Robot(Type.BLUE_TEAM);
+    public Robot robot;
     public Floor floor = new Floor(Type.BLUE_TEAM);
     public Floor floorEnemy = new Floor(Type.RED_TEAM);
     public int PointTeam1 = 0;
@@ -107,6 +108,16 @@ public class GameScene extends BaseScene{
         isEndGame = false;
         timeGame = 180;
         background = ImageManager.getImage("asset/Map.png");
+        //robot và enemy
+        if(gameType == GameType.PVP) {
+            robot = new Robot(Type.BLUE_TEAM);
+            enemy = new Robot(Type.RED_TEAM);
+        } else if(gameType == GameType.GUIDE_PLAY) {
+            this.rings = new ArrayList<>();
+            robot = new Robot(Type.BLUE_TEAM);
+            robot.setNumberOfRing(1000);
+            enemy = new Robot(Type.BLUE_TEAM);
+        }
     }
     @Override
     public void render() {
@@ -150,6 +161,7 @@ public class GameScene extends BaseScene{
                 collisionCheck(rings.get(i), poles.get(j));
             }
         }
+
         timeGame -= deltaTime;
         if(timeGame <= 0) {
             isEndGame = true;
@@ -163,6 +175,23 @@ public class GameScene extends BaseScene{
             }
             System.out.println(teamWin + "chiến thắng với điểm số: " + Integer.toString(PointTeam1) + " " + Integer.toString(PointTeam2));
         }
+
+        if (!rings.isEmpty()) {
+            Iterator<Ring> iterator = rings.iterator();
+
+            while (iterator.hasNext()) {
+                Ring ring = iterator.next();
+
+                if (gameType == GameType.GUIDE_PLAY) {
+                    ring.timeAlive -= deltaTime;
+
+                    if (ring.timeAlive <= 0) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+
 
 
 
@@ -217,8 +246,8 @@ public class GameScene extends BaseScene{
         }
 
         //vòng trúng vào cột và tiếp tục đập vào cột
-        if(pole.ringTop == ring && distance - 2> ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
-
+        if(pole.ringTop == ring && distance> ring.getWidth()/2 - pole.getWidth()/2 && ring.getCenter().vectorBetween(pole.getCenter()).cosAngleBetween(ring.getSpeed()) <= 0) {
+            backPosition2(ring, pole);
             Vector2D difference = ring.getSpeed().subtract(projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
             Vector2D scaled = difference.multiply(2);
             ring.setSpeed(ring.getSpeed().subtract(scaled));
@@ -247,9 +276,9 @@ public class GameScene extends BaseScene{
     void backPosition2(Ring ring, Pole pole) {
         double actualDistance = ring.getCenter().distanceTo(pole.getCenter());
         double distance = ring.getWidth()/2 -  pole.getWidth()/2;
-        Vector2D sp = ring.getSpeed().subtract(projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
-        double time = ((actualDistance - distance - 1) / (ring.getSpeed().calculateMagnitude()));
-        ring.setPosition(ring.getPosition().x - time*sp.x, ring.getPosition().y - sp.y);
+        Vector2D sp = (projectVectorOntoPlane(ring.getSpeed(), ring.getCenter(), pole.getCenter()));
+        double time = ((actualDistance - distance+2) / (sp.calculateMagnitude()));
+        ring.setPosition(ring.getPosition().x + time*sp.x, ring.getPosition().y + time*sp.y);
     }
 
     @Override
