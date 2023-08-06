@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Vector;
 
 public class Ring extends BaseObject{
+
+    public double timeAlive = 10;
     public static final double weight = 0.1;
     public static final double thickness = 1;
     public static final double widthRing = 32;
@@ -84,12 +86,15 @@ public class Ring extends BaseObject{
         isIn = in;
     }
 
+    public boolean isIn() {
+        return isIn;
+    }
 
     @Override
     public void render() {
         GraphicsContext gc = GameVars.get("gc", GraphicsContext.class);
         gc.drawImage(image, x, y, width, height);
-        gc.fillText("height = " + high , this.x, this.y);
+        gc.fillText("height = " + (int) high , this.x, this.y);
 
 
         //mapping

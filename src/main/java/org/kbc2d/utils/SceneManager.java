@@ -24,7 +24,7 @@ public class SceneManager {
                 currentScene = new TrainingScene();
                 break;
             case PvE_SCENE:
-                currentScene = new PvEScene();
+                currentScene = new GuidePlay();
                 break;
             case PvP_SCENE:
                 currentScene = new PvPScene();
