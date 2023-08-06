@@ -13,8 +13,7 @@ import org.kbc2d.utils.SceneManager;
 
 import static org.kbc2d.constant.GlobalConstant.IMAGE_HIDDEN;
 import static org.kbc2d.constant.GlobalConstant.QWERTY;
-import static org.kbc2d.game.GameStatic.UNLOCK_LEVEL;
-import static org.kbc2d.game.GameStatic.imagesLevel1Training;
+import static org.kbc2d.game.GameStatic.*;
 
 public class BossQuestionScene extends BaseScene {
     BackgroundGame backgroundGame;
@@ -36,15 +35,16 @@ public class BossQuestionScene extends BaseScene {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(answer)) {
-                    System.out.println("Chúc mừng bạn vượt qua mức " + UNLOCK_LEVEL);
+
                     UNLOCK_LEVEL += 1;
                     // save to file
+                    WIN_LEVEL_1 = true;
                     GameStatic.saveGame();
-                    SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
+                    SceneManager.setCurrentScene(SceneType.LAST_BOSS_QUESTION_SCENE);
 
                 } else {
-                    System.out.println("Quay trở lại màn hình chính");
-                    SceneManager.setCurrentScene(SceneType.TRAINING_SCENE);
+                    WIN_LEVEL_1 = false;
+                    SceneManager.setCurrentScene(SceneType.LAST_BOSS_QUESTION_SCENE);
 
                 }
 

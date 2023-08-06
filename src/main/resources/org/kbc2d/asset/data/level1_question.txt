@@ -1,65 +1,62 @@
-Question: Câu 1: Trong trường hợp nào dưới đây có thể coi một đoàn tàu như một chất điểm?
+Question: Câu 1: Transistor trường (FET) là linh kiện điện tử:
 Answer:
-True: A. Đoàn tàu lúc khởi hành.
-B. Đoàn tàu đang qua cầu.
-C. Đoàn tàu đang chạy trên một đoạn đường vòng.
-D. Đoàn tàu đang chạy trên đường Hà Nội -Vinh.
+True: A. Được điều khiển bằng điện áp.
+B. Có hệ số khuếch đại điện áp rất cao.
+C. Có trở kháng vào thấp.
+D. Được điều khiển bằng dòng điện.
 
-Question: Câu 2: Một người ngồi trên xe đi từ TP HCM ra Đà Nẵng, nếu lấy vật làm mốc là tài xế đang lái xe thì vật chuyển động là:
+Question: Câu 2: MOSFET có hai chế độ hoạt động cơ bản là gì?
 Answer:
-True: A. Xe ô tô.
-B. Cột đèn bên đường.
-C. Bóng đèn trên xe.
-D. Hành khách đang ngồi trên xe.
+True: A. Chế độ dẫn và chế độ cắt
+B. Chế độ tắt và chế độ mở
+C. Chế độ tắt và chế độ chạy
+D. Chế độ tắt và chế độ dẫn
 
-Question: Câu 3: Một người đứng trên đường quan sát chiếc ô tô chạy qua trước mặt. Dấu hiệu nào cho biết ô tô đang chuyển động?
+Question: Câu 3: Phát biểu nào sau đây đúng:
 Answer:
-True: A. Khói phụt ra từ ống thoát khí đặt dưới gầm xe.
-B. Khoảng cách giữa xe và người đó thay đổi.
-C. Bánh xe quay tròn.
-D. Tiếng nổ của động cơ vang lên.
+True: A. Triac được xem như 2 tirixto mắc song song nhưng ngược chiều.
+B. Triac được xem như 2 tirixto mắc song song, cùng chiều.
+C. Triac khác điac ở chỗ triac không có cực điều khiển.
+D. Điac khác triac ở chỗ điac có cực điều khiển.
 
-Question: Câu 4: Trường hợp nào sau đây không thể coi vật như là một chất điểm?
+Question: Câu 4: Trong transistor MOSFET, điều gì kiểm soát dòng dẫn giữa nguồn và drain?
 Answer:
-True: A. Viên đạn đang chuyển động trong không khí.
-B. Trái đất chuyển động quay quanh mặt trời.
-C. Viên bi rơi từ tầng 5 của tòa nhà xuống đất.
-D. Trái đất chuyển động tự quay quanh trục của chính nó.
+True: A. Điện áp cổ (gate-source voltage)
+B. Điện áp nguồn (source voltage)
+C. Điện áp nghịch (drain voltage)
+D. Điện áp cực đại (maximum voltage)
 
-Question: Câu 5: Một chiếc xe lửa đang chuyển động, quan sát chiếc va li đặt trên giá để hàng hóa, nếu nói rằng:
-1. Va li đứng yên so với thành toa.
-2. Va li chuyển động so với đầu máy.
-3. Va li chuyển động so với đường ray thì nhận xét nào ở trên là đúng?
+Question: Câu 5: Chức năng nào dưới đây không phải của tranzito?
 Answer:
-True: A. 1 và 2.
-B. 2 và 3.
-C. 1 và 3.
-D. 1, 2 và 3.
+True: A. Là linh kiện điện tử dùng để chỉnh lưu
+B. Là linh kiện điện tử dùng để tạo sóng
+C. Là linh kiện điện tử dùng để tạo xung
+D. Là linh kiện điện tử dùng để khuếch đại tín hiệu
 
-Question: Câu 6: Để xác định hành trình một tàu trên biển, người ta không dùng đến thông tin nào dưới đây?
+Question: Câu 6: Người ta dùng linh kiện bán dẫn nào sau đây để chỉnh lưu?
 Answer:
-True: A. Kinh độ của con tàu tại mỗi điểm.
-B. Vĩ độ của con tàu tại mỗi điểm.
-C. Ngày, giờ con tàu đến mỗi điểm.
-D. Hướng đi của con tàu tại mỗi điểm.
+True: A. Điôt tiếp mặt
+B. Tranzito
+C. Triac
+D. Tirixto
 
-Question: Câu 7: Trong các ví dụ dưới đây, trường hợp nào vật chuyển động được coi như là chất điểm?
+Question: Câu 7: Điôt ổn áp (Điôt zene) khác Điôt chỉnh lưu ở chỗ:
 Answer:
-A. Mặt Trăng quay quanh Trái Đất.
-B. Đoàn tàu chuyển động trong sân ga.
-True: C. Em bé trượt từ đỉnh đến chân cầu trượt.
-D. Chuyển động tự quay của Trái Đất quanh trục.
+A. Chỉ cho dòng điện chạy qua theo một chiều từ anôt (A) sang catôt (K)
+B. Không bị đánh thủng khi bị phân cực ngược
+True: C. Bị đánh thủng mà vẫn không hỏng
+D. Chịu được được áp ngược cao hơn mà không bị đánh thủng
 
-Question: Câu 8: Một vật được coi là chất điểm khi vật có:
+Question: Câu 8: Transistor MOSFET có mấy lớp cơ bản?
 Answer:
-A. Kích thước rất nhỏ so với các vật khác.
-B. Kích thước rất nhỏ so với chiều dài đường đi của vật.
-True: C. Khối lượng rất nhỏ.
-D. Kích thước rất nhỏ so với chiều dài của vật.
+A. 1
+B. 4
+True: C. 2
+D. 3
 
-Question: Câu 9: Chọn đáp án đúng.
+Question: Câu 9: Trong transistor MOSFET, MOS viết tắt của gì?
 Answer:
-A. Quỹ đạo là một đường thẳng mà trên đó chất điểm chuyển động.
-B. Một đường cong mà trên đó chất điểm chuyển động gọi là quỹ đạo.
-True: C. Quỹ đạo là một đường mà chất điểm vạch ra trong không gian khi nó chuyển động.
-D. Một đường vạch sẵn trong không gian trên đó chất điểm chuyển động gọi là quỹ đạo.
+A. Metal Oxide Silicon
+B. Metal Organic Semiconductor
+True: C. Metal Oxide Semiconductor
+D. Metal Organic Silicon

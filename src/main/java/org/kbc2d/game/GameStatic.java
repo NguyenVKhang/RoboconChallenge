@@ -29,6 +29,7 @@ public class GameStatic {
 
    // static lung tung
     public static boolean BLUE_WIN = true;
+    public static boolean WIN_LEVEL_1 = false;
     public static int BLUE_SCORE = 10;
     public static int RED_SCORE = 10;
 }

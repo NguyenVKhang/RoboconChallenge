@@ -37,8 +37,8 @@ public class ChatClient {
 		});
 
 		// Request the host from the user.
-		InetAddress address = client.discoverHost(54777, 5000);
-		final String host = address.toString();
+		//InetAddress address = client.discoverHost(54777, 5000);
+		final String host = "192.168.137.1";
 
 		// Request the user's name.
 
@@ -59,8 +59,8 @@ public class ChatClient {
 					// Listener#connected().
 					ChatMessage msg = new ChatMessage();
 					msg.inputt = inputt;
-					msg.text = "1";
-					client.sendUDP(msg);
+					msg.text = "2";
+					client.sendTCP(msg);
 					client.stop();
 				} catch (IOException ex) {
 					ex.printStackTrace();
