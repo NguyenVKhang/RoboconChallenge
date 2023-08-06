@@ -32,7 +32,7 @@ public class BossQuestionScene extends BaseScene {
 
 
         backgroundGame = new BackgroundGame("asset/textures/ui/rectMenu/BackGround.png");
-        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 470, new DoClick() {
+        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/check.png", 400, 475, new DoClick() {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(answer)) {
@@ -55,12 +55,12 @@ public class BossQuestionScene extends BaseScene {
         }, new DoHover() {
             @Override
             public void doHover() {
-                checkAnswer.setImage("asset/textures/ui/hexMenu/continueHover.png");
+//                checkAnswer.setImage("asset/textures/ui/hexMenu/continueHover.png");
             }
         }, new DoNotHover() {
             @Override
             public void doNotHover() {
-                checkAnswer.setImage("asset/textures/ui/hexMenu/continue.png");
+//                checkAnswer.setImage("asset/textures/ui/hexMenu/continue.png");
             }
         });
 

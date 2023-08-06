@@ -152,7 +152,7 @@ public class QuestionTutorialScene extends BaseScene {
         }
 
 
-        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/continue.png", 400, 470, new DoClick() {
+        checkAnswer = new ButtonGame("asset/textures/ui/hexMenu/check.png", 400, 475, new DoClick() {
             @Override
             public void doClick() {
                 if (formGame.getTextInRectangle().equals(questionAnswer.get(indexQuestionAnswer).get(6))) {
@@ -170,12 +170,12 @@ public class QuestionTutorialScene extends BaseScene {
         }, new DoHover() {
             @Override
             public void doHover() {
-                checkAnswer.setImage("asset/textures/ui/hexMenu/continueHover.png");
+//                checkAnswer.setImage("asset/textures/ui/hexMenu/continueHover.png");
             }
         }, new DoNotHover() {
             @Override
             public void doNotHover() {
-                checkAnswer.setImage("asset/textures/ui/hexMenu/continue.png");
+//                checkAnswer.setImage("asset/textures/ui/hexMenu/continue.png");
             }
         });
 
